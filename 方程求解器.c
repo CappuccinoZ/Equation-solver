@@ -13,25 +13,25 @@ void fun2(double a, double b, double c)//ax^2+bx+c=0
 		{
 			x1 = (-b + sqrt(delta)) / (2 * a);
 			x2 = (-b - sqrt(delta)) / (2 * a);
-			printf("%lf.\n%lf.\n", x1, x2);
+			printf("\t%.12lf.\n\t%.12lf.\n", x1, x2);
 		}
 		else if (delta == 0)
 		{
 			x1 = -b / (2 * a);
-			printf("%lf.\n%lf.\n", x1, x1);
+			printf("\t%.12lf.\n\t%.12lf.\n", x1, x1);
 		}
 		else
 		{
 			x1 = -b / (2 * a);
 			x2 = sqrt(-delta) / (2 * a);
-			printf("%lf + %lf i.\n%lf - %lf i.\n", x1, x2, x1, x2);
+			printf("\t%.12lf + %.12lf i.\n\t%.12lf - %.12lf i.\n", x1, x2, x1, x2);
 		}
 	}
 	else
 	{
 		x1 = 0;
 		x2 = -b / a;
-		printf("%lf.\n%lf.\n", x1, x2);
+		printf("\t%.12lf.\n\t%.12lf.\n", x1, x2);
 	}
 }
 
@@ -79,12 +79,12 @@ void fun3(double a, double b, double c, double d)//ax^3+bx^2+cx+d=0
 	if (d)
 	{
 		x = fun3_subsidiary(a, b, c, d);
-		printf("%lf.\n", x);
+		printf("\t%.12lf.\n", x);
 		fun2(1, b / a + x, -d / (a*x));//x1+x2+x3 = -b/a; x1*x2*x3 = -d/a
 	}
 	else//d = 0
 	{
-		printf("0.\n");//x = 0
+		printf("\t0.\n");//x = 0
 		fun2(a, b, c);
 	}
 }
@@ -107,7 +107,7 @@ void fun4(double a, double b, double c, double d, double e)//ax^4+bx^3+cx^2+dx+e
 	}
 	else
 	{
-		printf("0.\n");
+		printf("\t0.\n");
 		fun3(a, b, c, d);
 	}
 }
@@ -116,30 +116,30 @@ void judgement(double a, double b, double c, double d, double e)//判断方程最高次
 {
 	if (a)//四次
 	{
-		printf("\nx1,x2,x3,x4:\n");
+		printf("\n\tx1,x2,x3,x4:\n");
 		fun4(a, b, c, d, e);
 	}
 	else if (b)//三次
 	{
-		printf("\nx1,x2,x3:\n");
+		printf("\n\tx1,x2,x3:\n");
 		fun3(b, c, d, e);
 	}
 	else if (c)//二次
 	{
-		printf("\nx1,x2:\n");
+		printf("\n\tx1,x2:\n");
 		fun2(c, d, e);
 	}
 	else if (d)//一次
 	{
-		printf("\nx = %lf.\n", -e / d);
+		printf("\n\tx = %.12lf.\n", -e / d);
 	}
 	else if (e)//常值
 	{
-		printf("\n无解\n");
+		printf("\n\t无解\n");
 	}
 	else
 	{
-		printf("\n任意复数\n");
+		printf("\n\t任意复数\n");
 	}
 }
 
