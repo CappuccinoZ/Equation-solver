@@ -13,63 +13,58 @@ void fun2(double a, double b, double c)//ax^2+bx+c=0
 		{
 			x1 = (-b + sqrt(delta)) / (2 * a);
 			x2 = (-b - sqrt(delta)) / (2 * a);
-			printf("\t%.12lf.\n\t%.12lf.\n", x1, x2);
+			printf("\t%.12lf\n\t%.12lf\n", x1, x2);
 		}
 		else if (delta == 0)
 		{
 			x1 = -b / (2 * a);
-			printf("\t%.12lf.\n\t%.12lf.\n", x1, x1);
+			printf("\t%.12lf\n\t%.12lf\n", x1, x1);
 		}
 		else
 		{
 			x1 = -b / (2 * a);
 			x2 = sqrt(-delta) / (2 * a);
-			printf("\t%.12lf + %.12lf i.\n\t%.12lf - %.12lf i.\n", x1, x2, x1, x2);
+			printf("\t%.12lf + %.12lf i\n\t%.12lf - %.12lf i\n", x1, x2, x1, x2);
 		}
 	}
 	else
 	{
 		x1 = 0;
 		x2 = -b / a;
-		printf("\t%.12lf.\n\t%.12lf.\n", x1, x2);
+		printf("\t%.12lf\n\t%.12lf\n", x1, x2);
 	}
 }
 
 double fun3_subsidiary(double a, double b, double c, double d)//返回ax^3+bx^2+cx+d=0的一个根
 {
 	double p, q, r, x, theta, delta;
-	if (d)
-	{
-		temp = a;
-		a = b / temp;
-		b = c / temp;
-		c = d / temp;//x^3 + ax^2 + bx + c =0
 
-		p = b - a * a / 3;
-		q = c + a * (2 * a * a - 9 * b) / 27;
-		p /= -3;
-		q /= -2;
-		delta = q * q - p * p * p;
+	temp = a;
+	a = b / temp;
+	b = c / temp;
+	c = d / temp;//x^3 + ax^2 + bx + c =0
 
-		if (delta < 0)
-		{
-			r = p*sqrt(p);
-			theta = acos(q / r) / 3;
-			x = 2 * cbrt(r) * cos(theta) - a / 3;
-		}
-		else if (delta == 0)
-		{
-			x = -a / 3 + 2 * cbrt(q);
-		}
-		else
-		{
-			x = -a / 3 + cbrt(q + sqrt(delta)) + cbrt(q - sqrt(delta));//卡尔达诺公式
-		}
-	}
-	else//d = 0
+	p = b - a * a / 3;
+	q = c + a * (2 * a * a - 9 * b) / 27;
+	p /= -3;
+	q /= -2;
+	delta = q * q - p * p * p;
+
+	if (delta < 0)
 	{
-		x = 0;
+		r = p * sqrt(p);
+		theta = acos(q / r) / 3;
+		x = 2 * cbrt(r) * cos(theta) - a / 3;
 	}
+	else if (delta == 0)
+	{
+		x = -a / 3 + 2 * cbrt(q);
+	}
+	else
+	{
+		x = -a / 3 + cbrt(q + sqrt(delta)) + cbrt(q - sqrt(delta));//卡尔达诺公式
+	}
+
 	return x;
 }
 
@@ -79,12 +74,12 @@ void fun3(double a, double b, double c, double d)//ax^3+bx^2+cx+d=0
 	if (d)
 	{
 		x = fun3_subsidiary(a, b, c, d);
-		printf("\t%.12lf.\n", x);
+		printf("\t%.12lf\n", x);
 		fun2(1, b / a + x, -d / (a*x));//x1+x2+x3 = -b/a; x1*x2*x3 = -d/a
 	}
 	else//d = 0
 	{
-		printf("\t0.\n");//x = 0
+		printf("\t0.000000000000\n");//x = 0
 		fun2(a, b, c);
 	}
 }
@@ -99,15 +94,29 @@ void fun4(double a, double b, double c, double d, double e)//ax^4+bx^3+cx^2+dx+e
 		b = c / temp;
 		c = d / temp;
 		d = e / temp;
-		y = fun3_subsidiary(1, -b, a*c - 4 * d, 4 * b*d - a * a*d - c * c);//费拉里法
-		p = sqrt(a * a / 4 - b + y);
-		q = (a * y - 2 * c) / (a*a - 4 * b + 4 * y);
-		fun2(1, a / 2 - p, y / 2 - p * q);
-		fun2(1, a / 2 + p, y / 2 + p * q);
+		if (a != 0 || b != 0 || c != 0)
+		{
+			y = fun3_subsidiary(1, -b, a*c - 4 * d, 4 * b*d - a * a*d - c * c);//费拉里法
+			p = sqrt(a * a / 4 - b + y);
+			q = (a * y - 2 * c) / (a*a - 4 * b + 4 * y);
+			fun2(1, a / 2 - p, y / 2 - p * q);
+			fun2(1, a / 2 + p, y / 2 + p * q);
+		}
+		else if (d < 0)//x^4+d=0
+		{
+			y = pow(-d, 0.25);
+			printf("\t%.12lf\n\t-%.12lf\n\t%.12lf i\n\t-%.12lf i\n", y, y, y, y);
+		}
+		else
+		{
+			y = pow(d, 0.25) / sqrt(2);
+			printf("\t%.12lf + %.12lf i\n\t%.12lf - %.12lf i\n", y, y, y, y);
+			printf("\t-%.12lf + %.12lf i\n\t-%.12lf - %.12lf i\n", y, y, y, y);
+		}
 	}
 	else
 	{
-		printf("\t0.\n");
+		printf("\t0.000000000000\n");
 		fun3(a, b, c, d);
 	}
 }
