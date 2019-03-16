@@ -1,4 +1,4 @@
-#include <stdio.h>
+ï»¿#include <stdio.h>
 #include <math.h>
 #include <conio.h>
 double temp;
@@ -6,7 +6,13 @@ double temp;
 void fun2(double a, double b, double c)//ax^2+bx+c=0
 {
 	double x1, x2, delta;
-	if (c)
+	if (fabs(c) < 1e-30)//x(ax+b)=0
+	{
+		x1 = 0;
+		x2 = -b / a;
+		printf("\t%.12lf\n\t%.12lf\n", x1, x2);
+	}
+	else
 	{
 		b /= a;
 		c /= a;
@@ -29,15 +35,9 @@ void fun2(double a, double b, double c)//ax^2+bx+c=0
 			printf("\t%.12lf + %.12lf i\n\t%.12lf - %.12lf i\n", x1, x2, x1, x2);
 		}
 	}
-	else//x(ax+b)=0
-	{
-		x1 = 0;
-		x2 = -b / a;
-		printf("\t%.12lf\n\t%.12lf\n", x1, x2);
-	}
 }
 
-double fun3_subsidiary(double a, double b, double c, double d)//·µ»Øax^3+bx^2+cx+d=0µÄÒ»¸ö¸ù
+double fun3_subsidiary(double a, double b, double c, double d)//è¿”å›žax^3+bx^2+cx+d=0çš„ä¸€ä¸ªæ ¹
 {
 	double p, q, r, x, theta, delta;
 
@@ -64,7 +64,7 @@ double fun3_subsidiary(double a, double b, double c, double d)//·µ»Øax^3+bx^2+cx
 	}
 	else
 	{
-		x = -a / 3 + cbrt(q + sqrt(delta)) + cbrt(q - sqrt(delta));//¿¨¶û´ïÅµ¹«Ê½
+		x = -a / 3 + cbrt(q + sqrt(delta)) + cbrt(q - sqrt(delta));//å¡å°”è¾¾è¯ºå…¬å¼
 	}
 
 	return x;
@@ -73,23 +73,28 @@ double fun3_subsidiary(double a, double b, double c, double d)//·µ»Øax^3+bx^2+cx
 void fun3(double a, double b, double c, double d)//ax^3+bx^2+cx+d=0
 {
 	double x;
-	if (d)
+	if (fabs(d) < 1e-30)//x(ax^2+bx+c)=0
+	{
+		printf("\t0.000000000000\n");//x = 0
+		fun2(a, b, c);//é™æ¬¡
+	}
+	else
 	{
 		x = fun3_subsidiary(a, b, c, d);
 		printf("\t%.12lf\n", x);
 		fun2(1, b / a + x, -d / (a*x));//x1+x2+x3 = -b/a; x1*x2*x3 = -d/a
-	}
-	else//d = 0
-	{
-		printf("\t0.000000000000\n");//x = 0
-		fun2(a, b, c);//½µ´Î
 	}
 }
 
 void fun4(double a, double b, double c, double d, double e)//ax^4+bx^3+cx^2+dx+e=0
 {
 	double y, p, q, r, delta, theta;
-	if (e)
+	if (fabs(e) < 1e-30)//x(ax^3+bx^2+cx+d)=0
+	{
+		printf("\t0.000000000000\n");
+		fun3(a, b, c, d);
+	}
+	else
 	{
 		temp = a;
 		a = b / temp;
@@ -98,13 +103,27 @@ void fun4(double a, double b, double c, double d, double e)//ax^4+bx^3+cx^2+dx+e
 		d = e / temp;
 		if (a != 0 || c != 0)
 		{
-			y = fun3_subsidiary(1, -b, a*c - 4 * d, 4 * b*d - a * a*d - c * c);//·ÑÀ­Àï·¨
+			y = fun3_subsidiary(1, -b, a*c - 4 * d, 4 * b*d - a * a*d - c * c);//è´¹æ‹‰é‡Œæ³•
 			p = sqrt(a * a / 4 - b + y);
 			q = (a * y - 2 * c) / (a*a - 4 * b + 4 * y);
 			fun2(1, a / 2 - p, y / 2 - p * q);
 			fun2(1, a / 2 + p, y / 2 + p * q);
 		}
-		else if (b)//x^4+bx^2+d=0
+		else if (fabs(b) < 1e-30)//x^4+d=0
+		{
+			if (d < 0)
+			{
+				y = pow(-d, 0.25);
+				printf("\t%.12lf\n\t-%.12lf\n\t%.12lf i\n\t-%.12lf i\n", y, y, y, y);
+			}
+			else
+			{
+				y = pow(d / 4, 0.25);
+				printf("\t%.12lf + %.12lf i\n\t%.12lf - %.12lf i\n", y, y, y, y);
+				printf("\t-%.12lf + %.12lf i\n\t-%.12lf - %.12lf i\n", y, y, y, y);
+			}
+		}
+		else //x^4+bx^2+d=0
 		{
 			delta = b * b - 4 * d;
 			if (delta > 0)
@@ -160,26 +179,10 @@ void fun4(double a, double b, double c, double d, double e)//ax^4+bx^3+cx^2+dx+e
 				printf("\t%+.12lf %+.12lf i\n\t%+.12lf %+.12lf i\n", p, q, -p, -q);
 			}
 		}
-		else if (d < 0)//x^4+d=0
-		{
-			y = pow(-d, 0.25);
-			printf("\t%.12lf\n\t-%.12lf\n\t%.12lf i\n\t-%.12lf i\n", y, y, y, y);
-		}
-		else
-		{
-			y = pow(d / 4, 0.25);
-			printf("\t%.12lf + %.12lf i\n\t%.12lf - %.12lf i\n", y, y, y, y);
-			printf("\t-%.12lf + %.12lf i\n\t-%.12lf - %.12lf i\n", y, y, y, y);
-		}
-	}
-	else
-	{
-		printf("\t0.000000000000\n");
-		fun3(a, b, c, d);
 	}
 }
 
-double fun5_subsidiary(double a, double b, double c, double d, double e, double x)//Å£¶Ùµü´ú·¨
+double fun5_subsidiary(double a, double b, double c, double d, double e, double x)//ç‰›é¡¿è¿­ä»£æ³•
 {
 	double derivative;
 	temp = x * (x*(x*(x + a) + b) + c) + d;
@@ -191,25 +194,30 @@ double fun5_subsidiary(double a, double b, double c, double d, double e, double 
 void fun5(double a, double b, double c, double d, double e)//x^5+ax^4+bx^3+cx^2+dx+e=0
 {
 	double x, i;
-	if (e)
+	if (fabs(e) < 1e-30)
 	{
-		if (d)
+		printf("\t0.000000000000\n");
+		fun4(1, a, b, c, d);
+	}
+	else
+	{
+		if (d != 0)
 		{
 			x = 0;
 		}
-		else if (5 + 4 * a + 3 * b + 2 * c + d)
+		else if (5 + 4 * a + 3 * b + 2 * c + d != 0)
 		{
 			x = 1;
 		}
-		else if (5 - 4 * a + 3 * b - 2 * c + d)
+		else if (5 - 4 * a + 3 * b - 2 * c + d != 0)
 		{
 			x = -1;
 		}
-		else if (80+32*a+12*b+4*c+d)
+		else if (80 + 32 * a + 12 * b + 4 * c + d != 0)
 		{
 			x = 2;
 		}
-		else//·ÀÖ¹µ¼ÊýµÈÓÚ0
+		else//é˜²æ­¢å¯¼æ•°ç­‰äºŽ0
 		{
 			x = 2.718;
 		}
@@ -219,66 +227,61 @@ void fun5(double a, double b, double c, double d, double e)//x^5+ax^4+bx^3+cx^2+
 			x = fun5_subsidiary(a, b, c, d, e, x);
 		}
 		printf("\t%.12lf\n", x);
-		fun4(1, x + a, x * x + a * x + b, x * x*x + a * x*x + b * x + c, temp);//½µ´Î
-	}
-	else
-	{
-		printf("\t0.000000000000\n");
-		fun4(1, a, b, c, d);
+		fun4(1, x + a, x * x + a * x + b, x * x*x + a * x*x + b * x + c, temp);//é™æ¬¡
 	}
 }
 
-void judgement(double a, double b, double c, double d, double e, double f)//ÅÐ¶Ï·½³Ì×î¸ß´ÎÊý
+void judgement(double a, double b, double c, double d, double e, double f)//åˆ¤æ–­æ–¹ç¨‹æœ€é«˜æ¬¡æ•°
 {
-	if (a)//Îå´Î
+	if (a != 0)//äº”æ¬¡
 	{
 		printf("\n\tx1,x2,x3,x4,x5:\n");
 		fun5(b / a, c / a, d / a, e / a, f / a);
 	}
-	else if (b)//ËÄ´Î
+	else if (b != 0)//å››æ¬¡
 	{
 		printf("\n\tx1,x2,x3,x4:\n");
 		fun4(b, c, d, e, f);
 	}
-	else if (c)//Èý´Î
+	else if (c != 0)//ä¸‰æ¬¡
 	{
 		printf("\n\tx1,x2,x3:\n");
 		fun3(c, d, e, f);
 	}
-	else if (d)//¶þ´Î
+	else if (d != 0)//äºŒæ¬¡
 	{
 		printf("\n\tx1,x2:\n");
 		fun2(d, e, f);
 	}
-	else if (e)//Ò»´Î
+	else if (e != 0)//ä¸€æ¬¡
 	{
 		printf("\n\tx = %.12lf.\n", -f / e);
 	}
-	else if (f)//³£Öµ
+	else if (f != 0)//å¸¸å€¼
 	{
-		printf("\n\tÎÞ½â\n");
+		printf("\n\tæ— è§£\n");
 	}
-	else//³£Öµ
+	else//å¸¸å€¼
 	{
-		printf("\n\tÈÎÒâ¸´Êý\n");
+		printf("\n\tä»»æ„å¤æ•°\n");
 	}
 }
 
 int main(void)
 {
 	double a, b, c, d, e, f;
-	printf("Çó½â·½³Ìax^5+bx^4+cx^3+dx^2+ex+f=0(ÏµÊý¾ùÎªÊµÊý):\n");
-	printf("ÇëÊäÈëÎå´ÎÏîÏµÊý:\n");
+	printf("æ±‚è§£æ–¹ç¨‹ax^5+bx^4+cx^3+dx^2+ex+f=0(ç³»æ•°å‡ä¸ºå®žæ•°):\n");
+	printf("è¯·è¾“å…¥äº”æ¬¡é¡¹ç³»æ•°:\n");
 	scanf_s("%lf", &a);
-	printf("ÇëÊäÈëËÄ´ÎÏîÏµÊý:\n");
+	printf("è¯·è¾“å…¥å››æ¬¡é¡¹ç³»æ•°:\n");
 	scanf_s("%lf", &b);
-	printf("ÇëÊäÈëÈý´ÎÏîÏµÊý:\n");
+	printf("è¯·è¾“å…¥ä¸‰æ¬¡é¡¹ç³»æ•°:\n");
 	scanf_s("%lf", &c);
-	printf("ÇëÊäÈë¶þ´ÎÏîÏµÊý:\n");
+	printf("è¯·è¾“å…¥äºŒæ¬¡é¡¹ç³»æ•°:\n");
 	scanf_s("%lf", &d);
-	printf("ÇëÊäÈëÒ»´ÎÏîÏµÊý:\n");
+	printf("è¯·è¾“å…¥ä¸€æ¬¡é¡¹ç³»æ•°:\n");
 	scanf_s("%lf", &e);
-	printf("ÇëÊäÈë³£ÊýÏî:\n");
+	printf("è¯·è¾“å…¥å¸¸æ•°é¡¹:\n");
 	scanf_s("%lf", &f);
 
 	judgement(a, b, c, d, e, f);
