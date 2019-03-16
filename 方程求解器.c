@@ -222,7 +222,7 @@ void fun5(double a, double b, double c, double d, double e)//x^5+ax^4+bx^3+cx^2+
 			x = 2.718;
 		}
 
-		for (i = 0; i < 20; i++)
+		for (i = 0; i < 50; i++)
 		{
 			x = fun5_subsidiary(a, b, c, d, e, x);
 		}
