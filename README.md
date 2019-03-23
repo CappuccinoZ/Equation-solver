@@ -9,3 +9,4 @@ ax^3+bx^2+cx+d=0
 ax^2+bx+c=0
 - [C#版本](https://github.com/CappuccinoZ/Equation-solver/blob/master/C%23%E7%89%88%E6%9C%AC.exe)
 - [C版本](https://github.com/CappuccinoZ/Equation-solver/blob/master/%E6%96%B9%E7%A8%8B%E6%B1%82%E8%A7%A3%E5%99%A8.exe)
+*C版本待更新
