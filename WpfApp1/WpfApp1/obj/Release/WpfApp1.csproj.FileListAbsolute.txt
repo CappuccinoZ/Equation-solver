@@ -1,0 +1,13 @@
+C:\Users\Qi\source\repos\WpfApp1\WpfApp1\bin\Release\WpfApp1.exe
+C:\Users\Qi\source\repos\WpfApp1\WpfApp1\bin\Release\WpfApp1.pdb
+C:\Users\Qi\source\repos\WpfApp1\WpfApp1\obj\Release\MainWindow.g.cs
+C:\Users\Qi\source\repos\WpfApp1\WpfApp1\obj\Release\App.g.cs
+C:\Users\Qi\source\repos\WpfApp1\WpfApp1\obj\Release\WpfApp1_MarkupCompile.cache
+C:\Users\Qi\source\repos\WpfApp1\WpfApp1\obj\Release\WpfApp1_MarkupCompile.lref
+C:\Users\Qi\source\repos\WpfApp1\WpfApp1\obj\Release\MainWindow.baml
+C:\Users\Qi\source\repos\WpfApp1\WpfApp1\obj\Release\WpfApp1.g.resources
+C:\Users\Qi\source\repos\WpfApp1\WpfApp1\obj\Release\WpfApp1.Properties.Resources.resources
+C:\Users\Qi\source\repos\WpfApp1\WpfApp1\obj\Release\WpfApp1.csproj.GenerateResource.cache
+C:\Users\Qi\source\repos\WpfApp1\WpfApp1\obj\Release\WpfApp1.csproj.CoreCompileInputs.cache
+C:\Users\Qi\source\repos\WpfApp1\WpfApp1\obj\Release\WpfApp1.exe
+C:\Users\Qi\source\repos\WpfApp1\WpfApp1\obj\Release\WpfApp1.pdb
