@@ -5,32 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
-        Title="MainWindow" Height="470" Width="415" MinWidth="415" MinHeight="470" MaxWidth="415" MaxHeight="470" Background="#FFECF0F1">
+        Title="MainWindow" Height="465" Width="405" MinHeight="465" MinWidth="405" MaxHeight="465" MaxWidth="405" Background="#FFECF0F1">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="205*"/>
-            <ColumnDefinition Width="16*"/>
-            <ColumnDefinition Width="79*"/>
-            <ColumnDefinition Width="107*"/>
-        </Grid.ColumnDefinitions>
-        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="28.983" Margin="61,37.322,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="334.068" Text="0" KeyDown="TextBox1_KeyDown" Grid.ColumnSpan="4" FontFamily="Microsoft YaHei Light"/>
-        <TextBox x:Name="textBox2" HorizontalAlignment="Left" Height="28.983" Margin="61,71.305,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="334.068" Text="0" KeyDown="TextBox2_KeyDown" Grid.ColumnSpan="4" FontFamily="Microsoft YaHei Light"/>
-        <TextBox x:Name="textBox3" HorizontalAlignment="Left" Height="28.983" Margin="61,105.288,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="334.068" KeyDown="TextBox3_KeyDown" Grid.ColumnSpan="4" FontFamily="Microsoft YaHei Light"/>
-        <TextBox x:Name="textBox4" HorizontalAlignment="Left" Height="28.983" Margin="61,139.271,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="334.068" KeyDown="TextBox4_KeyDown" Grid.ColumnSpan="4" FontFamily="Microsoft YaHei Light"/>
-        <TextBox x:Name="textBox5" HorizontalAlignment="Left" Height="28.983" Margin="61,173.254,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="334.068" KeyDown="TextBox5_KeyDown" Grid.ColumnSpan="4" FontFamily="Microsoft YaHei Light"/>
-        <Label Content="ax^5+bx^4+cx^3+dx^2+ex+f=0" Height="27.322" Margin="61,5,0,0" VerticalAlignment="Top" FontFamily="Ink Free" FontSize="15" HorizontalAlignment="Left" Width="212" Grid.ColumnSpan="3"/>
-        <Label Content="ax^5:" HorizontalAlignment="Left" Height="28.983" Margin="8,37.322,0,0" VerticalAlignment="Top" Width="48" FontFamily="Ink Free" FontSize="15"/>
-        <Label Content="bx^4:" HorizontalAlignment="Left" Height="28.983" Margin="8,71.305,0,0" VerticalAlignment="Top" Width="48" FontFamily="Ink Free" FontSize="15"/>
-        <Label Content="cx^3:" HorizontalAlignment="Left" Height="28.983" Margin="8,105.288,0,0" VerticalAlignment="Top" Width="48" FontFamily="Ink Free" FontSize="15"/>
-        <Label Content="dx^2:" HorizontalAlignment="Left" Height="28.983" Margin="8,139.271,0,0" VerticalAlignment="Top" Width="48" FontFamily="Ink Free" FontSize="15"/>
-        <Label Content="ex:" HorizontalAlignment="Left" Height="28.983" Margin="8,173.254,0,0" VerticalAlignment="Top" Width="48" FontFamily="Ink Free" FontSize="15"/>
-        <TextBox x:Name="textBox6" HorizontalAlignment="Left" Height="28.983" Margin="61,207.237,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="334.068" KeyDown="TextBox6_KeyDown" Grid.ColumnSpan="4" FontFamily="Microsoft YaHei Light"/>
-        <Label Content="f:" HorizontalAlignment="Left" Height="28.983" Margin="8,207.237,0,0" VerticalAlignment="Top" Width="48" FontFamily="Ink Free" FontSize="15"/>
-        <TextBox x:Name="textBox7" HorizontalAlignment="Left" Height="184" Margin="61,241.22,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="334.068" Grid.ColumnSpan="4" FontFamily="Microsoft YaHei Light"/>
-        <Button x:Name="button1" Content="Solve" HorizontalAlignment="Left" Height="24" Margin="8,297.22,0,0" VerticalAlignment="Top" Width="48" Click="Button1_Click" FontFamily="Ink Free" FontSize="15"/>
-        <Button x:Name="button2" Content="Reset" HorizontalAlignment="Left" Height="24" Margin="8,355.22,0,0" VerticalAlignment="Top" Width="48" Click="Button2_Click" FontFamily="Ink Free" FontSize="15"/>
-        <TextBox x:Name="textBox8" HorizontalAlignment="Left" Height="27.322" Margin="47,5,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="48" Grid.Column="3" Text="100" FontFamily="Microsoft YaHei Light" KeyDown="TextBox8_KeyDown"/>
-        <Label Content="迭代次数:" Height="27.322" Margin="57,5,0,0" Width="69" Grid.ColumnSpan="2" FontFamily="Microsoft YaHei Light" VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="2"/>
-
+        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Height="28" Margin="58,38,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="325" FontFamily="Microsoft JhengHei UI" KeyUp="TextBox1_KeyUp"/>
+        <TextBox x:Name="textBox2" HorizontalAlignment="Left" Height="28" Margin="58,71,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="325" FontFamily="Microsoft JhengHei UI" KeyUp="TextBox2_KeyUp"/>
+        <TextBox x:Name="textBox3" HorizontalAlignment="Left" Height="28" Margin="58,104,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="325" FontFamily="Microsoft JhengHei UI" KeyUp="TextBox3_KeyUp"/>
+        <TextBox x:Name="textBox4" HorizontalAlignment="Left" Height="28" Margin="58,137,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="325" FontFamily="Microsoft JhengHei UI" KeyUp="TextBox4_KeyUp"/>
+        <TextBox x:Name="textBox5" HorizontalAlignment="Left" Height="28" Margin="58,170,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="325" FontFamily="Microsoft JhengHei UI" KeyUp="TextBox5_KeyUp"/>
+        <TextBox x:Name="textBox6" HorizontalAlignment="Left" Height="28" Margin="58,203,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="325" FontFamily="Microsoft JhengHei UI" KeyUp="TextBox6_KeyUp"/>
+        <TextBox x:Name="textBox7" HorizontalAlignment="Left" Height="184" Margin="58,236,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="325" FontFamily="Microsoft JhengHei UI" />
+        <TextBox x:Name="textBox8" HorizontalAlignment="Left" Height="28" Margin="335,5,0,0" TextWrapping="Wrap" Text="200" VerticalAlignment="Top" Width="48" FontFamily="Microsoft JhengHei UI" KeyUp="TextBox8_KeyUp" FontSize="13"/>
+        <Label x:Name="label1" Content="ax^5:" HorizontalAlignment="Left" Height="28" Margin="8,38,0,0" VerticalAlignment="Top" Width="45" FontFamily="Ink Free" FontSize="15"/>
+        <Label x:Name="label2" Content="bx^4:" HorizontalAlignment="Left" Height="28" Margin="8,71,0,0" VerticalAlignment="Top" Width="45" FontFamily="Ink Free" FontSize="15" MouseDoubleClick="Label2_MouseDoubleClick"/>
+        <Label x:Name="label3" Content="cx^3:" HorizontalAlignment="Left" Height="28" Margin="8,104,0,0" VerticalAlignment="Top" Width="45" FontFamily="Ink Free" FontSize="15" MouseDoubleClick="Label3_MouseDoubleClick"/>
+        <Label x:Name="label4" Content="dx^2:" HorizontalAlignment="Left" Height="28"  Margin="8,137,0,0" VerticalAlignment="Top" Width="45" FontFamily="Ink Free" FontSize="15" MouseDoubleClick="Label4_MouseDoubleClick"/>
+        <Label x:Name="label5" Content="ex:" HorizontalAlignment="Left" Height="28" Margin="8,170,0,0" VerticalAlignment="Top" Width="45" FontFamily="Ink Free" FontSize="15"/>
+        <Label x:Name="label6" Content="f:" HorizontalAlignment="Left" Height="28" Margin="8,203,0,0" VerticalAlignment="Top" Width="45" FontSize="15" FontFamily="Ink Free" />
+        <Label x:Name="label7" Content="ax^5+bx^4+cx^3+dx^2+ex+f=0"  HorizontalAlignment="Left" Height="28" Margin="58,5,0,0" VerticalAlignment="Top" Width="200" FontFamily="Ink Free" FontSize="15"/>
+        <Label x:Name="label8" Content="迭代次数" HorizontalAlignment="Left" Height="28" Width="67" Margin="263,5,0,0" VerticalAlignment="Top" FontFamily="KaiTi" FontSize="14"/>
+        <Button x:Name="button1" Content="求解" HorizontalAlignment="Left" Height="24" Margin="8,264,0,0" VerticalAlignment="Top" Width="45" Click="Button1_Click" FontSize="15" FontFamily="KaiTi"/>
+        <Button x:Name="button2" Content="重置" HorizontalAlignment="Left" Height="24" Margin="8,325,0,0" VerticalAlignment="Top" Width="45" Click="Button2_Click" FontSize="15" FontFamily="KaiTi"/>
+        <Button x:Name="button3" Content="说明" HorizontalAlignment="Left" Height="24" Margin="8,386,0,0" VerticalAlignment="Top" Width="45" Click="Button3_Click" FontSize="15" FontFamily="KaiTi"/>
     </Grid>
 </Window>

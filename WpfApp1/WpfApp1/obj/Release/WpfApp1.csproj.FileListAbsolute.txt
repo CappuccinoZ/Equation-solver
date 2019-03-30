@@ -11,3 +11,9 @@ C:\Users\Qi\source\repos\WpfApp1\WpfApp1\obj\Release\WpfApp1.csproj.GenerateReso
 C:\Users\Qi\source\repos\WpfApp1\WpfApp1\obj\Release\WpfApp1.csproj.CoreCompileInputs.cache
 C:\Users\Qi\source\repos\WpfApp1\WpfApp1\obj\Release\WpfApp1.exe
 C:\Users\Qi\source\repos\WpfApp1\WpfApp1\obj\Release\WpfApp1.pdb
+C:\Users\Qi\source\repos\WpfApp1\WpfApp1\obj\Release\Cubic.g.cs
+C:\Users\Qi\source\repos\WpfApp1\WpfApp1\obj\Release\Quadratic.g.cs
+C:\Users\Qi\source\repos\WpfApp1\WpfApp1\obj\Release\Quartic.g.cs
+C:\Users\Qi\source\repos\WpfApp1\WpfApp1\obj\Release\Cubic.baml
+C:\Users\Qi\source\repos\WpfApp1\WpfApp1\obj\Release\Quadratic.baml
+C:\Users\Qi\source\repos\WpfApp1\WpfApp1\obj\Release\Quartic.baml
