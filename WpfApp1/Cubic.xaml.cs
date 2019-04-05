@@ -68,7 +68,7 @@ namespace WpfApp1
                         }
                         else
                         {
-                            s2 = (Fabs(x2 - 1) < 1e-15) ? "i\r\n" : x2.ToString() + "i\r\n";
+                            s2 = x2.ToString() + "i\r\n";
                             textBox5.Text = textBox5.Text + s2 + "-" + s2;
                         }
                     }
