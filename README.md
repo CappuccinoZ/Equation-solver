@@ -1,4 +1,4 @@
-# 方程求解器
+# [方程求解器](https://github.com/CappuccinoZ/Equation-solver/releases)
 ## 一元五次方程求解（牛顿迭代法）
 - ax^5+bx^4+cx^3+dx^2+ex+f=0
 ## 一元四次方程求解（费拉里法）
