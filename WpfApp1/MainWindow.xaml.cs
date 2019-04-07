@@ -22,7 +22,7 @@ namespace WpfApp1
             return (x < 0) ? (-Math.Pow(-x, 1.0 / 3)) : (Math.Pow(x, 1.0 / 3));
         }
 
-        public double Maxof(double x, double y, double z)//三数最大值
+        public double Maxof(double x, double y, double z)//取最大值
         {
             if (x > y)
             {
@@ -332,7 +332,7 @@ namespace WpfApp1
             return x * (x * (x * (5 * x + 4 * a) + 3 * b) + 2 * c) + d;//5x^4+4ax^3+3bx^2+2cx+d
         }
 
-        public int Fun5_subsidiary(double a, double b, double c, double d, double e)//四次方程实根数量
+        public int Fun4_realroot(double a, double b, double c, double d, double e)//四次方程实根数量
         {
             int i = 0;
             double y, p, q, delta;
@@ -475,7 +475,7 @@ namespace WpfApp1
             }
             else
             {
-                i = Fun5_subsidiary(5, 4 * a, 3 * b, 2 * c, d) - 1;
+                i = Fun4_realroot(5, 4 * a, 3 * b, 2 * c, d) - 1;
 
                 while (i >= 0)
                 {
