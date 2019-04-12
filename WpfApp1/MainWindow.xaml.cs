@@ -24,11 +24,8 @@ namespace WpfApp1
 
         public double Maxof(double x, double y, double z)//取最大值
         {
-            if (x > y)
-            {
-                y = x;
-            }
-            return (y > z) ? y : z;
+			double m = (x > y) ? x : y;
+            return (m > z) ? m : z;
         }
 
         public bool Isdouble(string target)//String是否可以转换成Double
