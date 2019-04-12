@@ -9,7 +9,7 @@ double root[4] = { 0 };
 double Maxof(double x, double y, double z)//取最大值
 {
 	double m = (x > y) ? x : y;
-	return (m > z)? m : z;
+	return (m > z) ? m : z;
 }
 
 void Fun2(double a, double b, double c)//ax^2+bx+c=0
@@ -532,7 +532,12 @@ void Fun5(double a, double b, double c, double d, double e)//x^5+ax^4+bx^3+cx^2+
 			{
 				x -= Fun5_calculation(a, b, c, d, e, x) / Fun5_derivative(a, b, c, d, x);
 			}
-			printf("[L-R = %E]\n", Fun5_calculation(a, b, c, d, e, x));
+			temp = Fun5_calculation(a, b, c, d, e, x);
+			if (fabs(temp) > 1)
+			{
+				printf("******误差范围过大******\n");
+			}
+			printf("[L-R = %E]\n", temp);
 		}
 		printf("x1, x2, x3, x4, x5:\n\t%.15lf\n", x);
 		Fun4(1, x + a, x * (x + a) + b, x * (x * (x + a) + b) + c, x * (x * (x * (x + a) + b) + c) + d);//降次
@@ -582,7 +587,7 @@ int main(void)
 {
 	double a, b, c, d, e, f;
 
-	printf("请输入方程ax^5+bx^4+cx^3+dx^2+ex+f=0的系数\n");
+	printf("请输入方程系数(ax^5+bx^4+cx^3+dx^2+ex+f=0)\n");
 	scanf_s("%lf%lf%lf%lf%lf%lf", &a, &b, &c, &d, &e, &f);
 	Judgement(a, b, c, d, e, f);
 	system("pause");

@@ -514,7 +514,12 @@ namespace WpfApp1
                     {
                         x -= Fun5_calculation(a, b, c, d, e, x) / Fun5_derivative(a, b, c, d, x);
                     }
-                    MessageBox.Show("L-R = " + Fun5_calculation(a, b, c, d, e, x).ToString());
+					temp = Fun5_calculation(a, b, c, d, e, x);
+					if (fabs(temp) > 1)
+					{
+						MessageBox.Show("误差范围过大!");
+					}
+                    MessageBox.Show("L-R = " + temp.ToString());
                 }
                 textBox7.Text = textBox7.Text + x.ToString() + "\r\n";
                 Fun4(1, x + a, x * (x + a) + b, x * (x * (x + a) + b) + c, x * (x * (x * (x + a) + b) + c) + d);//降次
