@@ -16,7 +16,7 @@ namespace WpfApp1
             return (x < 0) ? -x : x;
         }
 
-        public bool Isdouble(string target)//String是否可以转换成Double
+        public bool Isdouble(string target)//判断String是否可以转换成Double
         {
             return (double.TryParse(target, out temp)) ? true : false;
         }
@@ -29,7 +29,7 @@ namespace WpfApp1
             if (Fabs(c) < 1e-15)//x(ax+b)=0
             {
                 x1 = -b / a;
-                textBox4.Text = textBox4.Text + "0\r\n" + x1.ToString() + "\r\n";
+                textBox4.Text += ("0\r\n" + x1.ToString() + "\r\n");
             }
             else
             {
@@ -43,13 +43,13 @@ namespace WpfApp1
                     x2 = (-b - temp) / 2;
                     s1 = x1.ToString() + "\r\n";
                     s2 = x2.ToString() + "\r\n";
-                    textBox4.Text = textBox4.Text + s1 + s2;
+                    textBox4.Text += (s1 + s2);
                 }
                 else if (delta == 0)
                 {
                     x1 = -b / 2;
                     s1 = x1.ToString() + "\r\n";
-                    textBox4.Text = textBox4.Text + s1 + s1;
+                    textBox4.Text += (s1 + s1);
                 }
                 else
                 {
@@ -64,14 +64,14 @@ namespace WpfApp1
                         else
                         {
                             s2 = x2.ToString() + "i\r\n";
-                            textBox4.Text = textBox4.Text + s2 + "-" + s2;
+                            textBox4.Text += (s2 + "-" + s2);
                         }
                     }
                     else
                     {
                         s1 = x1.ToString();
                         s2 = (Fabs(x2 - 1) < 1e-15) ? "i\r\n" : x2.ToString() + "i\r\n";
-                        textBox4.Text = textBox4.Text + s1 + "+" + s2 + s1 + "-" + s2;
+                        textBox4.Text += (s1 + "+" + s2 + s1 + "-" + s2);
                     }
                 }
             }

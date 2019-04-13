@@ -18,10 +18,10 @@ namespace WpfApp1
 
         public double Cbrt(double x)//立方根
         {
-            return (x < 0) ? (-Math.Pow(-x, 1.0 / 3)) : (Math.Pow(x, 1.0 / 3));
+            return (x < 0) ? -Math.Pow(-x, 1.0 / 3) : Math.Pow(x, 1.0 / 3);
         }
 
-        public bool Isdouble(string target)//String是否可以转换成Double
+        public bool Isdouble(string target)//判断String是否可以转换成Double
         {
             return (double.TryParse(target, out temp)) ? true : false;
         }
@@ -34,7 +34,7 @@ namespace WpfApp1
             if (Fabs(c) < 1e-15)//x(ax+b)=0
             {
                 x1 = -b / a;
-                textBox5.Text = textBox5.Text + "0\r\n" + x1.ToString() + "\r\n";
+                textBox5.Text += ("0\r\n" + x1.ToString() + "\r\n");
             }
             else
             {
@@ -48,13 +48,13 @@ namespace WpfApp1
                     x2 = (-b - temp) / 2;
                     s1 = x1.ToString() + "\r\n";
                     s2 = x2.ToString() + "\r\n";
-                    textBox5.Text = textBox5.Text + s1 + s2;
+                    textBox5.Text += (s1 + s2);
                 }
                 else if (delta == 0)
                 {
                     x1 = -b / 2;
                     s1 = x1.ToString() + "\r\n";
-                    textBox5.Text = textBox5.Text + s1 + s1;
+                    textBox5.Text += (s1 + s1);
                 }
                 else
                 {
@@ -69,14 +69,14 @@ namespace WpfApp1
                         else
                         {
                             s2 = x2.ToString() + "i\r\n";
-                            textBox5.Text = textBox5.Text + s2 + "-" + s2;
+                            textBox5.Text += (s2 + "-" + s2);
                         }
                     }
                     else
                     {
                         s1 = x1.ToString();
                         s2 = (Fabs(x2 - 1) < 1e-15) ? "i\r\n" : x2.ToString() + "i\r\n";
-                        textBox5.Text = textBox5.Text + s1 + "+" + s2 + s1 + "-" + s2;
+                        textBox5.Text += (s1 + "+" + s2 + s1 + "-" + s2);
                     }
                 }
             }
@@ -125,7 +125,7 @@ namespace WpfApp1
             else
             {
                 x = Fun3_subsidiary(a, b, c, d);
-                textBox5.Text = textBox5.Text + x.ToString() + "\r\n";
+                textBox5.Text += (x.ToString() + "\r\n");
                 Fun2(a, a * x + b, x * (a * x + b) + c);
             }
         }

@@ -435,36 +435,35 @@ int Fun4_realroot(double a, double b, double c, double d, double e)//四次方�
 
 double Starter(double a, double b, double c, double d, double e)//x^5+ax^4+bx^3+cx^2+dx+e=0根的上界
 {
-	double k, q, y;
+	double q, y;
 	if (a > 0 && b > 0 && c > 0 && d > 0 && e > 0)
 	{
 		y = 0;
 	}
 	else
 	{
+		q = Maxof(fabs(a), fabs(b), fabs(c));
+		q = Maxof(q, fabs(d), fabs(e));
 		if (a < 0)
 		{
-			k = 1;
+			y = q;
 		}
 		else if (b < 0)
 		{
-			k = 2;
+			y = sqrt(q);
 		}
 		else if (c < 0)
 		{
-			k = 3;
+			y = cbrt(q);
 		}
 		else if (d < 0)
 		{
-			k = 4;
+			y = pow(q, 0.25);
 		}
 		else
 		{
-			k = 5;
+			y = pow(q, 0.2);
 		}
-		q = Maxof(fabs(a), fabs(b), fabs(c));
-		q = Maxof(q, fabs(d), fabs(e));
-		y = pow(q, 1.0 / k);
 	}
 	return y;
 }
@@ -567,8 +566,7 @@ void Judgement(double a, double b, double c, double d, double e, double f)//判�
 	}
 	else if (e != 0)//一次
 	{
-		f /= (-e);
-		printf("x = %.15lf\n", f);
+		printf("x = %E\n", -f / e);
 	}
 	else//常值
 	{

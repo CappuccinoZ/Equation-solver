@@ -19,10 +19,10 @@ namespace WpfApp1
 
         public double Cbrt(double x)//立方根
         {
-            return (x < 0) ? (-Math.Pow(-x, 1.0 / 3)) : (Math.Pow(x, 1.0 / 3));
+            return (x < 0) ? -Math.Pow(-x, 1.0 / 3) : Math.Pow(x, 1.0 / 3);
         }
 
-        public bool Isdouble(string target)//String是否可以转换成Double
+        public bool Isdouble(string target)//判断String是否可以转换成Double
         {
             return (double.TryParse(target, out temp)) ? true : false;
         }
@@ -35,7 +35,7 @@ namespace WpfApp1
             if (Fabs(c) < 1e-15)//x(ax+b)=0
             {
                 x1 = -b / a;
-                textBox6.Text = textBox6.Text + "0\r\n" + x1.ToString() + "\r\n";
+                textBox6.Text += ("0\r\n" + x1.ToString() + "\r\n");
             }
             else
             {
@@ -49,13 +49,13 @@ namespace WpfApp1
                     x2 = (-b - temp) / 2;
                     s1 = x1.ToString() + "\r\n";
                     s2 = x2.ToString() + "\r\n";
-                    textBox6.Text = textBox6.Text + s1 + s2;
+                    textBox6.Text += (s1 + s2);
                 }
                 else if (delta == 0)
                 {
                     x1 = -b / 2;
                     s1 = x1.ToString() + "\r\n";
-                    textBox6.Text = textBox6.Text + s1 + s1;
+                    textBox6.Text += (s1 + s1);
                 }
                 else
                 {
@@ -70,14 +70,14 @@ namespace WpfApp1
                         else
                         {
                             s2 = x2.ToString() + "i\r\n";
-                            textBox6.Text = textBox6.Text + s2 + "-" + s2;
+                            textBox6.Text += (s2 + "-" + s2);
                         }
                     }
                     else
                     {
                         s1 = x1.ToString();
                         s2 = (Fabs(x2 - 1) < 1e-15) ? "i\r\n" : x2.ToString() + "i\r\n";
-                        textBox6.Text = textBox6.Text + s1 + "+" + s2 + s1 + "-" + s2;
+                        textBox6.Text += (s1 + "+" + s2 + s1 + "-" + s2);
                     }
                 }
             }
@@ -126,7 +126,7 @@ namespace WpfApp1
             else
             {
                 x = Fun3_subsidiary(a, b, c, d);
-                textBox6.Text = textBox6.Text + x.ToString() + "\r\n";
+                textBox6.Text += (x.ToString() + "\r\n");
                 Fun2(a, a * x + b, x * (a * x + b) + c);
             }
         }
@@ -180,14 +180,14 @@ namespace WpfApp1
                         y = Math.Pow(-d, 0.25);
                         s1 = y.ToString() + "\r\n";
                         s2 = (Fabs(y - 1) < 1e-15) ? "i\r\n" : y.ToString() + "i\r\n";
-                        textBox6.Text = textBox6.Text + s1 + "-" + s1 + s2 + "-" + s2;
+                        textBox6.Text += (s1 + "-" + s1 + s2 + "-" + s2);
                     }
                     else
                     {
                         y = Math.Pow(d / 4, 0.25);
                         s1 = y.ToString();
                         s2 = (Fabs(y - 1) < 1e-15) ? "i\r\n" : y.ToString() + "i\r\n";
-                        textBox6.Text = textBox6.Text + s1 + "+" + s2 + s1 + "-" + s2 + "-" + s1 + "+" + s2 + "-" + s1 + "-" + s2;
+                        textBox6.Text += (s1 + "+" + s2 + s1 + "-" + s2 + "-" + s1 + "+" + s2 + "-" + s1 + "-" + s2);
                     }
                 }
                 else //x^4+bx^2+d=0
@@ -201,13 +201,13 @@ namespace WpfApp1
                         {
                             y = Math.Sqrt(y / 2);
                             s1 = (Fabs(y - 1) < 1e-15) ? "i\r\n" : y.ToString() + "i\r\n";
-                            textBox6.Text = textBox6.Text + s1 + "-" + s1;
+                            textBox6.Text += (s1 + "-" + s1);
                         }
                         else
                         {
                             y = Math.Sqrt(-y / 2);
                             s1 = y.ToString() + "\r\n";
-                            textBox6.Text = textBox6.Text + s1 + "-" + s1;
+                            textBox6.Text += (s1 + "-" + s1);
                         }
 
                         y = b + temp;
@@ -215,13 +215,13 @@ namespace WpfApp1
                         {
                             y = Math.Sqrt(y / 2);
                             s1 = (Fabs(y - 1) < 1e-15) ? "i\r\n" : y.ToString() + "i\r\n";
-                            textBox6.Text = textBox6.Text + s1 + "-" + s1;
+                            textBox6.Text += (s1 + "-" + s1);
                         }
                         else
                         {
                             y = Math.Sqrt(-y / 2);
                             s1 = y.ToString() + "\r\n";
-                            textBox6.Text = textBox6.Text + s1 + "-" + s1;
+                            textBox6.Text += (s1 + "-" + s1);
                         }
                     }
                     else if (delta == 0)
@@ -230,13 +230,13 @@ namespace WpfApp1
                         {
                             y = Math.Sqrt(-b / 2);
                             s1 = y.ToString() + "\r\n";
-                            textBox6.Text = textBox6.Text + s1 + s1 + "-" + s1 + "-" + s1;
+                            textBox6.Text += (s1 + s1 + "-" + s1 + "-" + s1);
                         }
                         else
                         {
                             y = Math.Sqrt(b / 2);
                             s1 = (Fabs(y - 1) < 1e-15) ? "i\r\n" : y.ToString() + "i\r\n";
-                            textBox6.Text = textBox6.Text + s1 + s1 + "-" + s1 + "-" + s1;
+                            textBox6.Text += (s1 + s1 + "-" + s1 + "-" + s1);
                         }
                     }
                     else
@@ -249,13 +249,13 @@ namespace WpfApp1
                         {
                             s1 = Fabs(p).ToString();
                             s2 = (Fabs(Fabs(q) - 1) < 1e-15) ? "i\r\n" : Fabs(q).ToString() + "i\r\n";
-                            textBox6.Text = textBox6.Text + s1 + "-" + s2 + "-" + s1 + "+" + s2;
+                            textBox6.Text += (s1 + "-" + s2 + "-" + s1 + "+" + s2);
                         }
                         else
                         {
                             s1 = Fabs(p).ToString();
                             s2 = (Fabs(Fabs(q) - 1) < 1e-15) ? "i\r\n" : Fabs(q).ToString() + "i\r\n";
-                            textBox6.Text = textBox6.Text + s1 + "+" + s2 + "-" + s1 + "-" + s2;
+                            textBox6.Text += (s1 + "+" + s2 + "-" + s1 + "-" + s2);
                         }
                         theta = Math.Atan2(-Math.Sqrt(-delta) / 2, -b / 2) / 2;
                         p = r * Math.Cos(theta);
@@ -264,13 +264,13 @@ namespace WpfApp1
                         {
                             s1 = Fabs(p).ToString();
                             s2 = (Fabs(Fabs(q) - 1) < 1e-15) ? "i\r\n" : Fabs(q).ToString() + "i\r\n";
-                            textBox6.Text = textBox6.Text + s1 + "-" + s2 + "-" + s1 + "+" + s2;
+                            textBox6.Text += (s1 + "-" + s2 + "-" + s1 + "+" + s2);
                         }
                         else
                         {
                             s1 = Fabs(p).ToString();
                             s2 = (Fabs(Fabs(q) - 1) < 1e-15) ? "i\r\n" : Fabs(q).ToString() + "i\r\n";
-                            textBox6.Text = textBox6.Text + s1 + "+" + s2 + "-" + s1 + "-" + s2;
+                            textBox6.Text += (s1 + "+" + s2 + "-" + s1 + "-" + s2);
                         }
                     }
                 }
