@@ -617,7 +617,7 @@ namespace WpfApp1
 
         private void Button3_Click(object sender, RoutedEventArgs e)//说明
         {
-            MessageBox.Show("误差范围随系数变化;\r\n双击bx^4/cx^3/dx^2标签可切换模式;\r\n最后修改日期:2019-4-13\r\n");
+            MessageBox.Show("误差范围随系数变化;\r\n双击bx^4/cx^3/dx^2标签可切换模式;\r\n最后修改日期:2019-4-19\r\n");
         }
 
         private void TextBox1_KeyUp(object sender, KeyEventArgs e)

@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:WpfApp1"
         mc:Ignorable="d"
         Title="MainWindow" Height="465" Width="405" MinHeight="465" MinWidth="405" MaxHeight="465" MaxWidth="405" Background="#FFECF0F1">
     <Grid>
@@ -16,9 +15,9 @@
         <TextBox x:Name="textBox7" HorizontalAlignment="Left" Height="184" Margin="58,236,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="325" FontFamily="Microsoft JhengHei UI" />
         <TextBox x:Name="textBox8" HorizontalAlignment="Left" Height="28" Margin="335,5,0,0" TextWrapping="Wrap" Text="200" VerticalAlignment="Top" Width="48" FontFamily="Microsoft JhengHei UI" KeyUp="TextBox8_KeyUp" FontSize="13"/>
         <Label x:Name="label1" Content="ax^5:" HorizontalAlignment="Left" Height="28" Margin="8,38,0,0" VerticalAlignment="Top" Width="45" FontFamily="Ink Free" FontSize="15"/>
-        <Label x:Name="label2" Content="bx^4:" HorizontalAlignment="Left" Height="28" Margin="8,71,0,0" VerticalAlignment="Top" Width="45" FontFamily="Ink Free" FontSize="15" MouseDoubleClick="Label2_MouseDoubleClick"/>
-        <Label x:Name="label3" Content="cx^3:" HorizontalAlignment="Left" Height="28" Margin="8,104,0,0" VerticalAlignment="Top" Width="45" FontFamily="Ink Free" FontSize="15" MouseDoubleClick="Label3_MouseDoubleClick"/>
-        <Label x:Name="label4" Content="dx^2:" HorizontalAlignment="Left" Height="28"  Margin="8,137,0,0" VerticalAlignment="Top" Width="45" FontFamily="Ink Free" FontSize="15" MouseDoubleClick="Label4_MouseDoubleClick"/>
+        <Label x:Name="label2" Content="bx^4:" HorizontalAlignment="Left" Height="28" Margin="8,71,0,0" VerticalAlignment="Top" Width="45" FontFamily="Ink Free" FontSize="15" MouseDoubleClick="Label2_MouseDoubleClick" Foreground="#FF66CCFF"/>
+        <Label x:Name="label3" Content="cx^3:" HorizontalAlignment="Left" Height="28" Margin="8,104,0,0" VerticalAlignment="Top" Width="45" FontFamily="Ink Free" FontSize="15" MouseDoubleClick="Label3_MouseDoubleClick" Foreground="#FF66CCFF"/>
+        <Label x:Name="label4" Content="dx^2:" HorizontalAlignment="Left" Height="28"  Margin="8,137,0,0" VerticalAlignment="Top" Width="45" FontFamily="Ink Free" FontSize="15" MouseDoubleClick="Label4_MouseDoubleClick" Foreground="#FF66CCFF"/>
         <Label x:Name="label5" Content="ex:" HorizontalAlignment="Left" Height="28" Margin="8,170,0,0" VerticalAlignment="Top" Width="45" FontFamily="Ink Free" FontSize="15"/>
         <Label x:Name="label6" Content="f:" HorizontalAlignment="Left" Height="28" Margin="8,203,0,0" VerticalAlignment="Top" Width="45" FontSize="15" FontFamily="Ink Free" />
         <Label x:Name="label7" Content="ax^5+bx^4+cx^3+dx^2+ex+f=0"  HorizontalAlignment="Left" Height="28" Margin="58,5,0,0" VerticalAlignment="Top" Width="200" FontFamily="Ink Free" FontSize="15"/>
