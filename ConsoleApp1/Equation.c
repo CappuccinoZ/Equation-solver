@@ -176,8 +176,8 @@ void Fun4(double a, double b, double c, double d, double e)//ax^4+bx^3+cx^2+dx+e
 				}
 				else
 				{
-					printf("\t%.15lf+%.15lf\n\t%.15lf-%.15lf\n", y, y, y, y);
-					printf("\t-%.15lf+%.15lf\n\t-%.15lf-%.15lf\n", y, y, y, y);
+					printf("\t%.15lf+%.15lfi\n\t%.15lf-%.15lfi\n", y, y, y, y);
+					printf("\t-%.15lf+%.15lfi\n\t-%.15lf-%.15lfi\n", y, y, y, y);
 				}
 			}
 		}
