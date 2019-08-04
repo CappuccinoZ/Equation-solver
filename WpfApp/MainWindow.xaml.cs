@@ -12,7 +12,7 @@ namespace Solver
     /// </summary>
     public partial class MainWindow : Window
     {
-        readonly double DBL_EPSILON = 2.2204460492503131E-16;
+        readonly double DBL_EPSILON = 2.2204460492503131E-16;//零跨度值
         double[] root = { 0, 0, 0, 0 };
 
         public double Fabs(double x)//绝对值
