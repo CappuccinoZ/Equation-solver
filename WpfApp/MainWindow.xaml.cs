@@ -611,7 +611,7 @@ namespace Solver
 
         private void Button3_Click(object sender, RoutedEventArgs e)//说明
         {
-            MessageBox.Show("误差范围随系数变化;\r\n最后修改日期:2019-8-2\r\n");
+            MessageBox.Show("误差范围随系数变化;\r\n最后修改日期:2019-8-4\r\n");
         }
 
         private void FocusSet(bool c, Button b, TextBox t)
