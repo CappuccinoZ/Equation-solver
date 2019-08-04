@@ -482,7 +482,7 @@ void fun5(double a, double b, double c, double d, double e)//x^5+ax^4+bx^3+cx^2+
 			{
 				x += 0.125;
 			}
-			printf("请输入迭代次数(e.g.1000)\n");
+			puts("请输入迭代次数(e.g.1000)");
 			scanf_s("%d", &j);
 			for (i = 0; i < j; i++)
 			{
@@ -508,17 +508,17 @@ void judge(double a, double b, double c, double d, double e, double f)//判断�
 	}
 	else if (b != 0)//四次
 	{
-		printf("x1,x2,x3,x4:\n");
+		puts("x1,x2,x3,x4:");
 		fun4(b, c, d, e, f);
 	}
 	else if (c != 0)//三次
 	{
-		printf("x1,x2,x3:\n");
+		puts("x1,x2,x3:");
 		fun3(c, d, e, f);
 	}
 	else if (d != 0)//二次
 	{
-		printf("x1,x2:\n");
+		puts("x1,x2:");
 		fun2(d, e, f);
 	}
 	else if (e != 0)//一次
@@ -529,11 +529,11 @@ void judge(double a, double b, double c, double d, double e, double f)//判断�
 	{
 		if (f == 0)
 		{
-			printf("任意复数\n");
+			puts("任意复数");
 		}
 		else
 		{
-			printf("无解\n");
+			puts("无解");
 		}
 	}
 }
@@ -541,18 +541,18 @@ void judge(double a, double b, double c, double d, double e, double f)//判断�
 int main(void)
 {
 	double a, b, c, d, e, f;
-	printf("请输入方程系数(ax^5+bx^4+cx^3+dx^2+ex+f=0)\n");
-	printf("a:");
+	puts("请输入方程系数(ax^5+bx^4+cx^3+dx^2+ex+f=0)");
+	printf("a=");
 	scanf_s("%lf", &a);
-	printf("b:");
+	printf("b=");
 	scanf_s("%lf", &b);
-	printf("c:");
+	printf("c=");
 	scanf_s("%lf", &c);
-	printf("d:");
+	printf("d=");
 	scanf_s("%lf", &d);
-	printf("e:");
+	printf("e=");
 	scanf_s("%lf", &e);
-	printf("f:");
+	printf("f=");
 	scanf_s("%lf", &f);
 	judge(a, b, c, d, e, f);
 	system("pause");
