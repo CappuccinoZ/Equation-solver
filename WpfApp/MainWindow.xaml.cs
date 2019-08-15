@@ -15,29 +15,9 @@ namespace Solver
         readonly double DBL_EPSILON = 2.2204460492503131E-16;//零跨度值
         double[] root = { 0, 0, 0, 0 };
 
-        public double Fabs(double x)//绝对值
-        {
-            return (x < 0) ? -x : x;
-        }
-
-        bool Approx(double a, double b)//判断是否约等
-        {
-            return (b == 0) ? (Fabs(a) < DBL_EPSILON) : (Fabs(a - b) < DBL_EPSILON);
-        }
-
-        public double Cbrt(double x)//立方根
-        {
-            return (x < 0) ? -Math.Pow(-x, 1.0 / 3) : Math.Pow(x, 1.0 / 3);
-        }
-
-        public bool Isdouble(string target)//判断String是否可以转换成Double
-        {
-            return double.TryParse(target, out _) ? true : false;
-        }
-        public bool IsInt(string target)//判断String是否可以转换成Double
-        {
-            return int.TryParse(target, out _) ? true : false;
-        }
+        public bool Approx(double a, double b) => (b == 0) ? (Math.Abs(a) < DBL_EPSILON) : (Math.Abs(a - b) < DBL_EPSILON);//判断是否约等
+        public double Cbrt(double x) => (x < 0) ? -Math.Pow(-x, 1.0 / 3) : Math.Pow(x, 1.0 / 3);//立方根
+        public bool Isdouble(string target) => double.TryParse(target, out _) ? true : false;//判断String是否可以转换成Double
 
         public void Fun2(double a, double b, double c)//ax^2+bx+c=0
         {
@@ -59,13 +39,13 @@ namespace Solver
                     x2 = (-b - t) / 2;
                     s1 = x1.ToString() + "\r\n";
                     s2 = x2.ToString() + "\r\n";
-                    textBox7.Text += (s1 + s2);
+                    textBox7.Text += s1 + s2;
                 }
                 else if (delta == 0)
                 {
                     x1 = -b / 2;
                     s1 = x1.ToString() + "\r\n";
-                    textBox7.Text += (s1 + s1);
+                    textBox7.Text += s1 + s1;
                 }
                 else
                 {
@@ -74,13 +54,13 @@ namespace Solver
                     if (Approx(b, 0))
                     {
                         s2 = Approx(x2, 1) ? "i\r\n" : x2.ToString() + "i\r\n";
-                        textBox7.Text += (s2 + "-" + s2);
+                        textBox7.Text += s2 + "-" + s2;
                     }
                     else
                     {
                         s1 = x1.ToString();
                         s2 = Approx(x2, 1) ? "i\r\n" : x2.ToString() + "i\r\n";
-                        textBox7.Text += (s1 + "+" + s2 + s1 + "-" + s2);
+                        textBox7.Text += s1 + "+" + s2 + s1 + "-" + s2;
                     }
                 }
             }
@@ -186,7 +166,7 @@ namespace Solver
                         y = Math.Pow(d / 4, 0.25);
                         s1 = y.ToString();
                         s2 = Approx(y, 1) ? "i\r\n" : y.ToString() + "i\r\n";
-                        textBox7.Text += (s1 + "+" + s2 + s1 + "-" + s2 + "-" + s1 + "+" + s2 + "-" + s1 + "-" + s2);
+                        textBox7.Text += s1 + "+" + s2 + s1 + "-" + s2 + "-" + s1 + "+" + s2 + "-" + s1 + "-" + s2;
                     }
                 }
                 else //x^4+bx^2+d=0
@@ -208,7 +188,6 @@ namespace Solver
                             s1 = y.ToString() + "\r\n";
                             textBox7.Text += s1 + "-" + s1;
                         }
-
                         y = b + t;
                         if (y > 0)
                         {
@@ -225,17 +204,16 @@ namespace Solver
                     }
                     else if (delta == 0)
                     {
+                        y = Math.Sqrt(Math.Abs(b) / 2);
                         if (b < 0)
                         {
-                            y = Math.Sqrt(-b / 2);
                             s1 = y.ToString() + "\r\n";
                             textBox7.Text += s1 + s1 + "-" + s1 + "-" + s1;
                         }
                         else
                         {
-                            y = Math.Sqrt(b / 2);
                             s1 = Approx(y, 1) ? "i\r\n" : y.ToString() + "i\r\n";
-                            textBox7.Text += (s1 + s1 + "-" + s1 + "-" + s1);
+                            textBox7.Text += s1 + s1 + "-" + s1 + "-" + s1;
                         }
                     }
                     else
@@ -373,9 +351,9 @@ namespace Solver
                         {
                             y = Math.Sqrt(-b / 2);
                             root[0] = y;
-                            root[1] = y;
-                            root[2] = -y;
-                            root[3] = root[2];
+                            root[1] = -y;
+                            root[2] = root[0];
+                            root[3] = root[1];
                             i = 4;
                         }
                     }
@@ -413,26 +391,18 @@ namespace Solver
                 }
                 else
                 {
-                    y = Math.Pow(q, 0.2);
+                    y = Math.Pow(q, 1.0 / 5);
                 }
             }
             return y;
         }
 
-        public double Fun5_calculation(double a, double b, double c, double d, double e, double x)//计算函数值
-        {
-            return x * (x * (x * (x * (x + a) + b) + c) + d) + e;//x^5+ax^4+bx^3+cx^2+dx+e            
-        }
+        public double Fun5_calculation(double a, double b, double c, double d, double e, double x) => x * (x * (x * (x * (x + a) + b) + c) + d) + e;//计算函数值x^5+ax^4+bx^3+cx^2+dx+e
 
-        public double Fun5_derivative(double a, double b, double c, double d, double x)//计算导数
-        {
-            return x * (x * (x * (5 * x + 4 * a) + 3 * b) + 2 * c) + d;//5x^4+4ax^3+3bx^2+2cx+d
-        }
+        public double Fun5_derivative(double a, double b, double c, double d, double x) => x * (x * (x * (5 * x + 4 * a) + 3 * b) + 2 * c) + d;//计算导数5x^4+4ax^3+3bx^2+2cx+d
 
         public void Fun5(double a, double b, double c, double d, double e)//x^5+ax^4+bx^3+cx^2+dx+e=0
         {
-            double x;
-            bool stationary = false;
             if (Approx(e, 0))
             {
                 textBox7.Text += "0\r\n";
@@ -440,55 +410,51 @@ namespace Solver
             }
             else
             {
-                int i = Fun4_realroot(5, 4 * a, 3 * b, 2 * c, d) - 1;
-                while (i >= 0)
+                double x, t;
+                bool tangents = true;//切线法是否可用
+                int i = Fun4_realroot(5, 4 * a, 3 * b, 2 * c, d);
+                while (i > 0)
                 {
+                    i--;
                     if (Approx(Fun5_calculation(a, b, c, d, e, root[i]), 0))
                     {
-                        stationary = true;
+                        tangents = false;
                         break;
                     }
-                    i--;
                 }
-                if (stationary)
+                if (tangents)
                 {
-                    x = root[i];
-                }
-                else
-                {
-                    if (Start(a, b, c, d, e) == 0)
+                    t = Start(a, b, c, d, e);
+                    x = -Start(-a, b, -c, d, -e);
+                    if (t != 0)
                     {
-                        x = -Start(-a, b, -c, d, -e);
-                    }
-                    else if (Start(-a, b, -c, d, -e) == 0)
-                    {
-                        x = Start(a, b, c, d, e);
-                    }
-                    else
-                    {
-                        x = (Start(a, b, c, d, e) - Start(-a, b, -c, d, -e)) / 2;
+                        x = (x == 0) ? t : (t + x) / 2;
                     }
                     while (Approx(Fun5_derivative(a, b, c, d, x), 0))
                     {
                         x += 0.125;
                     }
-                    int k = Convert.ToInt32(textBox8.Text);
-                    if (k < 0 || k > 1000000)
+                    for (i = 1; i < 120000000; i++)
                     {
-                        k = 1000000;
-                    }
-                    for (i = 0; i < k; i++)
-                    {
+                        t = x;
                         x -= Fun5_calculation(a, b, c, d, e, x) / Fun5_derivative(a, b, c, d, x);
+                        if (Math.Abs(x - t) < 1e-5)
+                        {
+                            break;
+                        }
                     }
-                    double t = Fun5_calculation(a, b, c, d, e, x);
-                    if (Fabs(t) > 1)
+                    t = Fun5_calculation(a, b, c, d, e, x);
+                    if (Math.Abs(t) > 1)
                     {
-                        MessageBox.Show("误差范围过大!");
+                        MessageBox.Show("误差较大!");
                     }
-                    MessageBox.Show("L-R = " + t.ToString());
+                    MessageBox.Show("迭代次数:" + i.ToString() + "\r\nL-R = " + t.ToString());
                 }
-                textBox7.Text += (x.ToString() + "\r\n");
+                else
+                {
+                    x = root[i];
+                }
+                textBox7.Text += x.ToString() + "\r\n";
                 Fun4(1, x + a, x * (x + a) + b, x * (x * (x + a) + b) + c, x * (x * (x * (x + a) + b) + c) + d);//降次
             }
         }
@@ -539,23 +505,15 @@ namespace Solver
             {
                 if (comboBoxItem1.IsSelected)
                 {
-                    if (IsInt(textBox8.Text))
-                    {
-                        Judgement(
-                            Convert.ToDouble(textBox1.Text),
-                            Convert.ToDouble(textBox2.Text),
-                            Convert.ToDouble(textBox3.Text),
-                            Convert.ToDouble(textBox4.Text),
-                            Convert.ToDouble(textBox5.Text),
-                            Convert.ToDouble(textBox6.Text)
-                            );
-                        button2.Focus();
-                    }
-                    else
-                    {
-                        textBox8.Focus();
-                        MessageBox.Show("请检查输入内容(Alt+F4)");
-                    }
+                    Judgement(
+                        Convert.ToDouble(textBox1.Text),
+                        Convert.ToDouble(textBox2.Text),
+                        Convert.ToDouble(textBox3.Text),
+                        Convert.ToDouble(textBox4.Text),
+                        Convert.ToDouble(textBox5.Text),
+                        Convert.ToDouble(textBox6.Text)
+                        );
+                    button2.Focus();
                 }
                 else if (comboBoxItem2.IsSelected)
                 {
@@ -609,158 +567,77 @@ namespace Solver
             textBox7.Text = "";
         }
 
-        private void Button3_Click(object sender, RoutedEventArgs e)//说明
-        {
-            MessageBox.Show("误差范围随系数变化;\r\n最后修改日期:2019-8-4\r\n");
-        }
-
-        private void FocusSet(bool c, Button b, TextBox t)
-        {
-            if (c)
-                b.Focus();
-            else
-                t.Focus();
-        }
-
-        private void TextBox1_KeyUp(object sender, KeyEventArgs e)
+        private void FocusSet(KeyEventArgs e, TextBox t, bool c = true)
         {
             if (e.Key == Key.Enter || e.Key == Key.Down)
             {
-                textBox2.Focus();
-            }
-            else if (e.Key == Key.Up)
-            {
-                FocusSet(!comboBoxItem1.IsSelected, button2, textBox8);
-            }
-        }
-
-        private void TextBox2_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter || e.Key == Key.Down)
-            {
-                textBox3.Focus();
-            }
-            else if (e.Key == Key.Up)
-            {
-                textBox1.Focus();
+                if (c)
+                {
+                    t.Focus();
+                }
+                else
+                {
+                    button1.Focus();
+                }
             }
         }
 
-        private void TextBox3_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter || e.Key == Key.Down)
-            {
-                FocusSet(comboBoxItem4.IsSelected, button1, textBox4);
-            }
-            else if (e.Key == Key.Up)
-            {
-                textBox2.Focus();
-            }
-        }
-
-        private void TextBox4_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter || e.Key == Key.Down)
-            {
-                FocusSet(comboBoxItem3.IsSelected, button1, textBox5);
-            }
-            else if (e.Key == Key.Up)
-            {
-                textBox3.Focus();
-            }
-        }
-
-        private void TextBox5_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter || e.Key == Key.Down)
-            {
-                FocusSet(comboBoxItem2.IsSelected, button1, textBox6);
-            }
-            else if (e.Key == Key.Up)
-            {
-                textBox4.Focus();
-            }
-        }
-
-        private void TextBox6_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter || e.Key == Key.Down)
-            {
-                button1.Focus();
-            }
-            else if (e.Key == Key.Up)
-            {
-                textBox5.Focus();
-            }
-        }
-
-        private void TextBox8_KeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Enter || e.Key == Key.Down)
-            {
-                textBox1.Focus();
-            }
-            else if (e.Key == Key.Up)
-            {
-                button2.Focus();
-            }
-        }
+        private void TextBox1_KeyUp(object sender, KeyEventArgs e) => FocusSet(e, textBox2);
+        private void TextBox2_KeyUp(object sender, KeyEventArgs e) => FocusSet(e, textBox3);
+        private void TextBox3_KeyUp(object sender, KeyEventArgs e) => FocusSet(e, textBox4, !comboBoxItem4.IsSelected);
+        private void TextBox4_KeyUp(object sender, KeyEventArgs e) => FocusSet(e, textBox5, !comboBoxItem3.IsSelected);
+        private void TextBox5_KeyUp(object sender, KeyEventArgs e) => FocusSet(e, textBox6, !comboBoxItem2.IsSelected);
+        private void TextBox6_KeyUp(object sender, KeyEventArgs e) => FocusSet(e, textBox7, false);
 
         private void ComboBoxSet(int a)
         {
             label4.Visibility = (a == 2) ? Visibility.Hidden : Visibility.Visible;
             label5.Visibility = (a < 4) ? Visibility.Hidden : Visibility.Visible;
             label6.Visibility = (a < 5) ? Visibility.Hidden : Visibility.Visible;
-            label8.Visibility = (a < 5) ? Visibility.Hidden : Visibility.Visible;
             textBox4.Visibility = (a == 2) ? Visibility.Hidden : Visibility.Visible;
             textBox5.Visibility = (a < 4) ? Visibility.Hidden : Visibility.Visible;
             textBox6.Visibility = (a < 5) ? Visibility.Hidden : Visibility.Visible;
-            textBox8.Visibility = (a < 5) ? Visibility.Hidden : Visibility.Visible;
             button1.Margin = new Thickness(8, 99 + 33 * a, 0, 0);
             button2.Margin = new Thickness(8, 160 + 33 * a, 0, 0);
-            button3.Margin = new Thickness(8, 221 + 33 * a, 0, 0);
             textBox7.Margin = new Thickness(58, 71 + 33 * a, 0, 0);
             Height = 300 + 33 * a;
         }
 
+        private void LabelSet(string[] s)
+        {
+            label7.Content = s[0];
+            label1.Content = s[1];
+            label2.Content = s[2];
+            label3.Content = s[3];
+            label4.Content = s[4];
+            label5.Content = s[5];
+        }
+
         private void ComboBoxItem1_Selected(object sender, RoutedEventArgs e)
         {
-            label7.Content = "ax^5+bx^4+cx^3+dx^2+ex+f=0";
-            label1.Content = "ax^5";
-            label2.Content = "bx^4";
-            label3.Content = "cx^3";
-            label4.Content = "dx^2";
-            label5.Content = "ex";
+            string[] s = { "ax^5+bx^4+cx^3+dx^2+ex+f=0", "ax^5", "bx^4", "cx^3", "dx^2", "ex" };
+            LabelSet(s);
             ComboBoxSet(5);
         }
 
         private void ComboBoxItem2_Selected(object sender, RoutedEventArgs e)
         {
-            label7.Content = "ax^4+bx^3+cx^2+dx+e=0";
-            label1.Content = "ax^4";
-            label2.Content = "bx^3";
-            label3.Content = "cx^2";
-            label4.Content = "dx";
-            label5.Content = "e";
+            string[] s = { "ax^4+bx^3+cx^2+dx+e=0", "ax^4", "bx^3", "cx^2", "dx", "e" };
+            LabelSet(s);
             ComboBoxSet(4);
         }
 
         private void ComboBoxItem3_Selected(object sender, RoutedEventArgs e)
         {
-            label7.Content = "ax^3+bx^2+cx+d=0";
-            label1.Content = "ax^3";
-            label2.Content = "bx^2";
-            label3.Content = "cx";
-            label4.Content = "d";
+            string[] s = { "ax^3+bx^2+cx+d=0", "ax^3", "bx^2", "cx", "d", "" };
+            LabelSet(s);
             ComboBoxSet(3);
         }
 
         private void ComboBoxItem4_Selected(object sender, RoutedEventArgs e)
         {
-            label7.Content = "ax^2+bx+c=0";
-            label1.Content = "ax^2";
-            label2.Content = "bx";
-            label3.Content = "c";
+            string[] s = { "ax^2+bx+c=0", "ax^2", "bx", "c", "", "" };
+            LabelSet(s);
             ComboBoxSet(2);
         }
     }

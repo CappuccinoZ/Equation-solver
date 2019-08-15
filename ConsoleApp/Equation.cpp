@@ -1,4 +1,4 @@
-﻿#include <stdio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <math.h>
@@ -15,7 +15,7 @@ void fun2(double a, double b, double c)//ax^2+bx+c=0
 {
 	if (approx(c, 0))//x(ax+b)=0
 	{
-		printf("0\n%.15lf\n", -b / a);
+		printf("0\n%.12lf\n", -b / a);
 	}
 	else
 	{
@@ -28,12 +28,12 @@ void fun2(double a, double b, double c)//ax^2+bx+c=0
 			double t = sqrt(delta);
 			x1 = (-b + t) / 2;
 			x2 = (-b - t) / 2;
-			printf("%.15lf\n%.15lf\n", x1, x2);
+			printf("%.12lf\n%.12lf\n", x1, x2);
 		}
 		else if (delta == 0)
 		{
 			x1 = -b / 2;
-			printf("%.15lf\n%.15lf\n", x1, x1);
+			printf("%.12lf\n%.12lf\n", x1, x1);
 		}
 		else
 		{
@@ -47,18 +47,18 @@ void fun2(double a, double b, double c)//ax^2+bx+c=0
 				}
 				else
 				{
-					printf("%.15lfi\n-%.15lfi\n", x2, x2);
+					printf("%.12lfi\n-%.12lfi\n", x2, x2);
 				}
 			}
 			else
 			{
 				if (approx(x2, 1))
 				{
-					printf("%.15lf+i\n%.15lf-i\n", x1, x1);
+					printf("%.12lf+i\n%.12lf-i\n", x1, x1);
 				}
 				else
 				{
-					printf("%.15lf+%.15lfi\n%.15lf-%.15lfi\n", x1, x2, x1, x2);
+					printf("%.12lf+%.12lfi\n%.12lf-%.12lfi\n", x1, x2, x1, x2);
 				}
 			}
 		}
@@ -104,7 +104,7 @@ void fun3(double a, double b, double c, double d)//ax^3+bx^2+cx+d=0
 	else
 	{
 		double x = fun3_subsidiary(a, b, c, d);
-		printf("%.15lf\n", x);
+		printf("%.12lf\n", x);
 		fun2(a, a * x + b, x * (a * x + b) + c);
 	}
 }
@@ -132,14 +132,14 @@ void fun4(double a, double b, double c, double d, double e)//ax^4+bx^3+cx^2+dx+e
 				t = sqrt(y * y - 4 * d);
 				p = sqrt(a * a + 8 * (t - y));
 				q = (p - a) / 4;
-				printf("%.15lf\n", q);
+				printf("%.12lf\n", q);
 				q = -(p + a) / 4;
-				printf("%.15lf\n", q);
+				printf("%.12lf\n", q);
 				p = sqrt(a * a - 8 * (t + y));
 				q = (p - a) / 4;
-				printf("%.15lf\n", q);
+				printf("%.12lf\n", q);
 				q = -(p + a) / 4;
-				printf("%.15lf\n", q);
+				printf("%.12lf\n", q);
 			}
 			else
 			{
@@ -160,7 +160,7 @@ void fun4(double a, double b, double c, double d, double e)//ax^4+bx^3+cx^2+dx+e
 				}
 				else
 				{
-					printf("%.15lf\n-%.15lf\n%.15lfi\n-%.15lfi\n", y, y, y, y);
+					printf("%.12lf\n-%.12lf\n%.12lfi\n-%.12lfi\n", y, y, y, y);
 				}
 			}
 			else
@@ -172,8 +172,8 @@ void fun4(double a, double b, double c, double d, double e)//ax^4+bx^3+cx^2+dx+e
 				}
 				else
 				{
-					printf("%.15lf+%.15lfi\n%.15lf-%.15lfi\n", y, y, y, y);
-					printf("-%.15lf+%.15lfi\n-%.15lf-%.15lfi\n", y, y, y, y);
+					printf("%.12lf+%.12lfi\n%.12lf-%.12lfi\n", y, y, y, y);
+					printf("-%.12lf+%.12lfi\n-%.12lf-%.12lfi\n", y, y, y, y);
 				}
 			}
 		}
@@ -193,13 +193,13 @@ void fun4(double a, double b, double c, double d, double e)//ax^4+bx^3+cx^2+dx+e
 					}
 					else
 					{
-						printf("%.15lfi\n-%.15lfi\n", y, y);
+						printf("%.12lfi\n-%.12lfi\n", y, y);
 					}
 				}
 				else
 				{
 					y = sqrt(-y / 2);
-					printf("%.15lf\n-%.15lf\n", y, y);
+					printf("%.12lf\n-%.12lf\n", y, y);
 				}
 				y = b + t;
 				if (y > 0)
@@ -211,32 +211,31 @@ void fun4(double a, double b, double c, double d, double e)//ax^4+bx^3+cx^2+dx+e
 					}
 					else
 					{
-						printf("%.15lfi\n-%.15lfi\n", y, y);
+						printf("%.12lfi\n-%.12lfi\n", y, y);
 					}
 				}
 				else
 				{
 					y = sqrt(-y / 2);
-					printf("%.15lf\n-%.15lf\n", y, y);
+					printf("%.12lf\n-%.12lf\n", y, y);
 				}
 			}
 			else if (delta == 0)
 			{
+				y = sqrt(fabs(b) / 2);
 				if (b < 0)
 				{
-					y = sqrt(-b / 2);
-					printf("%.15lf\n%.15lf\n-%.15lf\n-%.15lf\n", y, y, y, y);
+					printf("%.12lf\n%.12lf\n-%.12lf\n-%.12lf\n", y, y, y, y);
 				}
 				else
 				{
-					y = sqrt(b / 2);
 					if (approx(y, 1))
 					{
 						printf("i\ni\n-i\n-i\n");
 					}
 					else
 					{
-						printf("%.15lfi\n%.15lfi\n-%.15lfi\n-%.15lfi\n", y, y, y, y);
+						printf("%.12lfi\n%.12lfi\n-%.12lfi\n-%.12lfi\n", y, y, y, y);
 					}
 				}
 			}
@@ -248,13 +247,13 @@ void fun4(double a, double b, double c, double d, double e)//ax^4+bx^3+cx^2+dx+e
 				q = r * sin(theta);
 				if (approx(q, 1))
 				{
-					printf("%.15lf+i\n%.15lf-i\n", p, p);
-					printf("-%.15lf+i\n-%.15lf-i\n", p, p);
+					printf("%.12lf+i\n%.12lf-i\n", p, p);
+					printf("-%.12lf+i\n-%.12lf-i\n", p, p);
 				}
 				else
 				{
-					printf("%.15lf+%.15lfi\n%.15lf-%.15lfi\n", p, q, p, q);
-					printf("-%.15lf+%.15lfi\n-%.15lf-%.15lfi\n", p, q, p, q);
+					printf("%.12lf+%.12lfi\n%.12lf-%.12lfi\n", p, q, p, q);
+					printf("-%.12lf+%.12lfi\n-%.12lf-%.12lfi\n", p, q, p, q);
 				}
 
 			}
@@ -382,9 +381,9 @@ int fun4_realroot(double a, double b, double c, double d, double e)//四次方�
 				{
 					y = sqrt(-b / 2);
 					root[0] = y;
-					root[1] = y;
-					root[2] = -y;
-					root[3] = root[2];
+					root[1] = -y;
+					root[2] = root[0];
+					root[3] = root[1];
 					i = 4;
 				}
 			}
@@ -422,7 +421,7 @@ double start(double a, double b, double c, double d, double e)//x^5+ax^4+bx^3+cx
 		}
 		else
 		{
-			y = pow(q, 0.2);
+			y = pow(q, 1.0 / 5);
 		}
 	}
 	return y;
@@ -440,9 +439,6 @@ double fun5_derivative(double a, double b, double c, double d, double x)//计算
 
 void fun5(double a, double b, double c, double d, double e)//x^5+ax^4+bx^3+cx^2+dx+e=0
 {
-	int i, j;
-	double x;
-	bool stationary = false;
 	if (approx(e, 0))
 	{
 		printf("x1,x2,x3,x4,x5:\n0\n");
@@ -450,52 +446,49 @@ void fun5(double a, double b, double c, double d, double e)//x^5+ax^4+bx^3+cx^2+
 	}
 	else
 	{
-		i = fun4_realroot(5, 4 * a, 3 * b, 2 * c, d) - 1;
-		while (i >= 0)
+		double x, t;
+		bool tangents = true;//切线法是否可用
+		int i = fun4_realroot(5, 4 * a, 3 * b, 2 * c, d);
+		while (i > 0)
 		{
+			i--;
 			if (approx(fun5_calculation(a, b, c, d, e, root[i]), 0))
 			{
-				stationary = true;
+				tangents = false;
+				x = root[i];
 				break;
 			}
-			i--;
 		}
-		if (stationary)
+		if (tangents)
 		{
-			x = root[i];
-		}
-		else
-		{
-			if (start(a, b, c, d, e) == 0)
+			t = start(a, b, c, d, e);
+			x = -start(-a, b, -c, d, -e);
+			if (t != 0)
 			{
-				x = -start(-a, b, -c, d, -e);
-			}
-			else if (start(-a, b, -c, d, -e) == 0)
-			{
-				x = start(a, b, c, d, e);
-			}
-			else
-			{
-				x = (start(a, b, c, d, e) - start(-a, b, -c, d, -e)) / 2;
+				x = (x == 0) ? t : (t + x) / 2;
 			}
 			while (approx(fun5_derivative(a, b, c, d, x), 0))
 			{
 				x += 0.125;
 			}
-			puts("请输入迭代次数(e.g.1000)");
-			scanf_s("%d", &j);
-			for (i = 0; i < j; i++)
+			for (i = 1; i < 200000000; i++)
 			{
+				t = x;
 				x -= fun5_calculation(a, b, c, d, e, x) / fun5_derivative(a, b, c, d, x);
+				if (fabs(x - t) < 1e-15)
+				{
+					break;
+				}
 			}
-			double t = fun5_calculation(a, b, c, d, e, x);
+			printf("[迭代次数:%d]\n", i);
+			t = fun5_calculation(a, b, c, d, e, x);
 			if (fabs(t) > 1)
 			{
-				puts("******误差范围过大******");
+				puts("******误差较大******");
 			}
 			printf("[L-R = %E]\n", t);
 		}
-		printf("x1, x2, x3, x4, x5:\n%.15lf\n", x);
+		printf("x1, x2, x3, x4, x5:\n%.12lf\n", x);
 		fun4(1, x + a, x * (x + a) + b, x * (x * (x + a) + b) + c, x * (x * (x * (x + a) + b) + c) + d);//降次
 	}
 }
@@ -523,7 +516,7 @@ void judge(double a, double b, double c, double d, double e, double f)//判断�
 	}
 	else if (e != 0)//一次
 	{
-		printf("x = %.15lf\n", -f / e);
+		printf("x = %10.12lf\n", -f / e);
 	}
 	else//常值
 	{
@@ -542,17 +535,17 @@ int main(void)
 {
 	double a, b, c, d, e, f;
 	puts("请输入方程系数(ax^5+bx^4+cx^3+dx^2+ex+f=0)");
-	printf("a=");
+	printf("a: ");
 	scanf_s("%lf", &a);
-	printf("b=");
+	printf("b: ");
 	scanf_s("%lf", &b);
-	printf("c=");
+	printf("c: ");
 	scanf_s("%lf", &c);
-	printf("d=");
+	printf("d: ");
 	scanf_s("%lf", &d);
-	printf("e=");
+	printf("e: ");
 	scanf_s("%lf", &e);
-	printf("f=");
+	printf("f: ");
 	scanf_s("%lf", &f);
 	judge(a, b, c, d, e, f);
 	system("pause");
