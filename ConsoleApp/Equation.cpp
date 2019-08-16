@@ -84,7 +84,7 @@ double fun3_subsidiary(double a, double b, double c, double d)//返回ax^3+bx^2+
 	}
 	else if (delta == 0)
 	{
-		x = 2 * cbrt(q) - a / 3;
+		x = (q < 0) ? -cbrt(q) - a / 3 : 2 * cbrt(q) - a / 3;
 	}
 	else
 	{
@@ -129,17 +129,8 @@ void fun4(double a, double b, double c, double d, double e)//ax^4+bx^3+cx^2+dx+e
 			y = fun3_subsidiary(1, -b, a * c - 4 * d, 4 * b * d - a * a * d - c * c);//费拉里法
 			if (approx(a * a - 4 * b + 4 * y, 0))
 			{
-				t = sqrt(y * y - 4 * d);
-				p = sqrt(a * a + 8 * (t - y));
-				q = (p - a) / 4;
-				printf("%.12lf\n", q);
-				q = -(p + a) / 4;
-				printf("%.12lf\n", q);
-				p = sqrt(a * a - 8 * (t + y));
-				q = (p - a) / 4;
-				printf("%.12lf\n", q);
-				q = -(p + a) / 4;
-				printf("%.12lf\n", q);
+				fun2(1, a / 2, y / 2);
+				fun2(1, a / 2, y / 2);
 			}
 			else
 			{
@@ -299,14 +290,14 @@ int fun4_realroot(double a, double b, double c, double d, double e)//四次方�
 			y = fun3_subsidiary(1, -b, a * c - 4 * d, 4 * b * d - a * a * d - c * c);//费拉里法
 			if (approx(a * a - 4 * b + 4 * y, 0))
 			{
-				t = sqrt(y * y - 4 * d);
-				p = sqrt(a * a + 8 * (t - y));
-				root[0] = (p - a) / 4;
-				root[1] = -(p + a) / 4;
-				p = sqrt(a * a - 8 * (t + y));
-				root[2] = (p - a) / 4;
-				root[3] = -(p + a) / 4;
-				i = 4;
+				if (t >= 0)
+				{
+					root[0] = -a / 4 + sqrt(t) / 2;
+					root[1] = -a / 4 - sqrt(t) / 2;
+					root[2] = root[0];
+					root[3] = root[1];
+					i = 4;
+				}
 			}
 			else
 			{

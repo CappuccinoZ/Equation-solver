@@ -85,7 +85,7 @@ namespace Solver
             }
             else if (delta == 0)
             {
-                x = 2 * Cbrt(q) - a / 3;
+                x = q < 0 ? -Cbrt(q) - a / 3 : 2 * Cbrt(q) - a / 3;
             }
             else
             {
@@ -131,18 +131,8 @@ namespace Solver
                     y = Fun3_subsidiary(1, -b, a * c - 4 * d, 4 * b * d - a * a * d - c * c);//费拉里法
                     if (Approx(a * a - 4 * b + 4 * y, 0))
                     {
-                        t = Math.Sqrt(y * y - 4 * d);
-                        p = Math.Sqrt(a * a + 8 * (t - y));
-                        q = (p - a) / 4;
-                        s1 = q.ToString() + "\r\n";
-                        q = -(p + a) / 4;
-                        s1 += q.ToString() + "\r\n";
-                        p = Math.Sqrt(a * a - 8 * (t + y));
-                        q = (p - a) / 4;
-                        s1 += q.ToString() + "\r\n";
-                        q = -(p + a) / 4;
-                        s1 += q.ToString() + "\r\n";
-                        textBox7.Text += s1;
+                        Fun2(1, a / 2, y / 2);
+                        Fun2(1, a / 2, y / 2);
                     }
                     else
                     {
@@ -235,7 +225,7 @@ namespace Solver
         {
             int i = 0;
             double y, p, q, t, delta;
-            if (Approx(e, 0))//x(ax^3+bx^2+cx+)=0
+            if (Approx(e, 0))//x(ax^3+bx^2+cx+d)=0
             {
                 root[1] = Fun3_subsidiary(a, b, c, d);
                 delta = b * b - 4 * a * c - a * root[1] * (3 * a * root[1] + 2 * b);
@@ -269,14 +259,15 @@ namespace Solver
                     y = Fun3_subsidiary(1, -b, a * c - 4 * d, 4 * b * d - a * a * d - c * c);//费拉里法
                     if (Approx(a * a - 4 * b + 4 * y, 0))
                     {
-                        t = Math.Sqrt(y * y - 4 * d);
-                        p = Math.Sqrt(a * a + 8 * (t - y));
-                        root[0] = (p - a) / 4;
-                        root[1] = -(p + a) / 4;
-                        p = Math.Sqrt(a * a - 8 * (t + y));
-                        root[2] = (p - a) / 4;
-                        root[3] = -(p + a) / 4;
-                        i = 4;
+                        t = a * a / 4 - 2 * y;
+                        if (t >= 0)
+                        {
+                            root[0] = -a / 4 + Math.Sqrt(t) / 2;
+                            root[1] = -a / 4 - Math.Sqrt(t) / 2;
+                            root[2] = root[0];
+                            root[3] = root[1];
+                            i = 4;
+                        }
                     }
                     else
                     {
@@ -438,7 +429,7 @@ namespace Solver
                     {
                         t = x;
                         x -= Fun5_calculation(a, b, c, d, e, x) / Fun5_derivative(a, b, c, d, x);
-                        if (Math.Abs(x - t) < 1e-5)
+                        if (Math.Abs(x - t) < 1E-15)
                         {
                             break;
                         }
