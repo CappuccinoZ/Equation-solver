@@ -1,4 +1,4 @@
-/*complex.js|CappuccinoZ.github.io|2021-4-17*/
+/*complex.js|CappuccinoZ.github.io|2021-5-2*/
 class Complex {
     constructor(real, imag) {
         if (isNaN(real) || isNaN(imag)) throw new TypeError();
@@ -313,28 +313,29 @@ class Fraction {
     }
 }
 function isInteger(x) {
-    return Math.abs(x - Math.round(x)) < 1e-9;
+    return Math.abs(x - Math.round(x)) < 1e-7;
 }
 function format(x) {
-    var a, f, z, b, d;
+    var a, b, c, d, f, t, y, z;
     var str = "";
-    if (!isInteger(x) && Math.abs(x) < 100 && Math.abs(x) > 0.01) {
+    if (!isInteger(x) && Math.abs(x) < 25 && Math.abs(x) > 0.01) {
         if (x < 0) {
             str += "-";
             x = -x;
         }
-        for (a = 1; a < 100; a++) {
+        for (a = 1; a < 25; a++) {
             f = x * a;
             if (isInteger(f)) {
                 str += '\\frac{' + Math.round(f) + '}{' + a + '}';
                 return str;
             } else if (isInteger(f * f)) {
-                var t = '\\sqrt{' + Math.round(f * f) + '}';
+                for (b = Math.floor(f); b > 1 && !isInteger(f * f / (b * b)); b--);
+                t = (b == 1 ? '' : b) + '\\sqrt{' + Math.round(f * f / (b * b)) + '}';
                 str += (a == 1) ? t : '\\frac{' + t + '}{' + a + '}';
                 return str;
             }
             else {
-                for (z = 1; z < 100; z++) {
+                for (z = 1; z < 70000; z++) {
                     y = Math.pow(f - Math.sqrt(z), 2);
                     if (isInteger(y)) {
                         for (b = Math.round(Math.sqrt(y)); b > 0; b--) {
