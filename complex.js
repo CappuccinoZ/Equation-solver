@@ -284,7 +284,7 @@ function fun5(a, b, c, d, e) {
                 t = x;
                 x -= fun5_calc(a, b, c, d, e, x) / fun5_derivative(a, b, c, d, x);
                 i++
-            } while (i < 60000000 && Math.abs(x - t) > 1e-15)
+            } while (i < 6000 && Math.abs(x - t) > 1e-15)
             show("迭代次数:" + i);
             t = fun5_calc(a, b, c, d, e, x);
             if (Math.abs(t) > 1) show("误差较大");
@@ -335,7 +335,7 @@ function format(x) {
                 return str;
             }
             else {
-                for (z = 1; z < 70000; z++) {
+                for (z = 1; z < 1000; z++) {
                     y = Math.pow(f - Math.sqrt(z), 2);
                     if (isInteger(y)) {
                         for (b = Math.round(Math.sqrt(y)); b > 0; b--) {
