@@ -122,7 +122,8 @@ function solve() {
             show("任意复数");
             break
     }
-    katex.render(document.getElementById("box").innerHTML, document.getElementById("box"))
+    box.innerHTML = '$$\\begin{array}{c}' + box.innerHTML + '\\end{array}$$';
+    MathJax.typeset()
 }
 
 function fun2(a, b, c) {
@@ -231,30 +232,8 @@ function fun4_realroot(a, b, c, d, e) {
 }
 
 function start(a, b, c, d, e) {
-    var y = 0;
-    if (Math.min(a, b, c, d, e) < 0) {
-        var q = Math.max(a, b, c, d, e);
-        switch (true) {
-            case a < 0:
-                y = q;
-                break;
-            case b < 0:
-                y = Math.sqrt(q);
-                break;
-            case c < 0:
-                y = Math.cbrt(q);
-                break;
-            case d < 0:
-                y = Math.pow(q, 0.25);
-                break;
-            case e < 0:
-                y = Math.pow(q, 0.2);
-                break;
-            default:
-                break
-        }
-    }
-    return y
+    y = Math.max(Math.abs(a), Math.abs(b), Math.abs(c), Math.abs(d), Math.abs(e));
+    return (e < 0 ? y : -y)
 }
 const fun5_calc = (a, b, c, d, e, x) => x * (x * (x * (x * (x + a) + b) + c) + d) + e;
 const fun5_derivative = (a, b, c, d, x) => x * (x * (x * (5 * x + 4 * a) + 3 * b) + 2 * c) + d;
@@ -275,9 +254,7 @@ function fun5(a, b, c, d, e) {
             }
         root.length = 0;
         if (f) {
-            t = start(a, b, c, d, e);
-            x = -start(-a, b, -c, d, -e);
-            if (t != 0) x = equal(x, 0) ? t : (t + x) / 2;
+            x = start(a, b, c, d, e);
             while (equal(fun5_derivative(a, b, c, d, x), 0)) x += 0.125;
             i = 0;
             do {
