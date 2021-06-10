@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -62,7 +63,7 @@ namespace Solver
     /// </summary>
     public partial class MainWindow : Window
     {
-        public bool Equal(double a, double b) => Math.Abs(a - b) <= 2.2204460492503131E-16;//判断是否约等
+        public bool Equal(double a, double b) => Math.Abs(a - b) <= 1e-12;//判断是否约等
         public double Cbrt(double x) => (x < 0) ? -Math.Pow(-x, 1.0 / 3) : Math.Pow(x, 1.0 / 3);//立方根
         public bool Isdouble(string target) => double.TryParse(target, out _);//判断String是否可以转换成Double
         public void Show<T>(T str) => textBox7.Text += str.ToString() + "\r\n";
@@ -114,25 +115,34 @@ namespace Solver
                 }
                 else
                 {
-                    double y = Fun3_one(1, -b, a * c - 4 * d, 4 * b * d - a * a * d - c * c);
-                    double p = Math.Sqrt(a * a / 4 - b + y);
-                    if (Equal(p, 0))
+                    double u = a / 2, v = (4 * b - a * a) / 8;
+                    if (Equal(c, 2 * u * v) && Equal(d, v * v))
                     {
-                        Complex t = new Complex(y * y / 4 - d, 0).Sqrt();
-                        Fun2(1, a / 2, y / 2 + t);
-                        Fun2(1, a / 2, y / 2 - t);
+                        Fun2(1, u, v);
+                        Fun2(1, u, v);
                     }
                     else
                     {
-                        double q = (a * y - 2 * c) / (4 * p * p);
-                        Fun2(1, a / 2 - p, y / 2 - p * q);
-                        Fun2(1, a / 2 + p, y / 2 + p * q);
+                        double y = Fun3_one(1, -b, a * c - 4 * d, 4 * b * d - a * a * d - c * c);
+                        k = a * a / 4 - b + y;
+                        if (Equal(k, 0))
+                        {
+                            Complex t = new Complex(y * y / 4 - d, 0).Sqrt();
+                            Fun2(1, a / 2, y / 2 + t);
+                            Fun2(1, a / 2, y / 2 - t);
+                        }
+                        else
+                        {
+                            double p = Math.Sqrt(k), q = (a * y - 2 * c) / (4 * p * p);
+                            Fun2(1, a / 2 - p, y / 2 - p * q);
+                            Fun2(1, a / 2 + p, y / 2 + p * q);
+                        }
                     }
                 }
             }
         }
 
-        double[] root = { 0, 0, 0, 0 };
+        public List<double> root = new List<double>();
         public void Fun4_realroot(double a, double b, double c, double d, double e)//四次方程实根数量
         {
             double t, y, p, q, delta;
@@ -142,8 +152,8 @@ namespace Solver
             c = d * t;
             d = e * t;
             y = Fun3_one(1, -b, a * c - 4 * d, 4 * b * d - a * a * d - c * c);
-            p = Math.Sqrt(a * a / 4 - b + y);
-            if (Equal(p, 0))
+            t = a * a / 4 - b + y;
+            if (Equal(t, 0))
             {
                 if (y * y - 4 * d >= 0)
                 {
@@ -151,67 +161,45 @@ namespace Solver
                     if (delta >= 0)
                     {
                         t = Math.Sqrt(delta);
-                        root[0] = -a / 4 + t;
-                        root[1] = -a / 4 - t;
+                        root.Add(-a / 4 + t);
+                        root.Add(-a / 4 - t);
                     }
                     delta = a * a / 16 - y / 2 - Math.Sqrt(y * y / 4 - d);
                     if (delta >= 0)
                     {
                         t = Math.Sqrt(delta);
-                        root[2] = -a / 4 + t;
-                        root[3] = -a / 4 - t;
+                        root.Add(-a / 4 + t);
+                        root.Add(-a / 4 - t);
                     }
                 }
             }
             else
             {
+                p = Math.Sqrt(t);
                 q = (a * y - 2 * c) / (4 * p * p);
                 delta = 4 * p * (p + 4 * q - a) + a * a - 8 * y;
                 if (delta >= 0)
                 {
                     t = Math.Sqrt(delta);
-                    root[0] = (2 * p - a + t) / 4;
-                    root[1] = (2 * p - a - t) / 4;
+                    root.Add((2 * p - a + t) / 4);
+                    root.Add((2 * p - a - t) / 4);
                 }
                 delta = 4 * p * (p - 4 * q + a) + a * a - 8 * y;
                 if (delta >= 0)
                 {
                     t = Math.Sqrt(delta);
-                    root[2] = (-2 * p - a + t) / 4;
-                    root[3] = (-2 * p - a - t) / 4;
+                    root.Add((-2 * p - a + t) / 4);
+                    root.Add((-2 * p - a - t) / 4);
                 }
             }
         }
 
         public double Start(double a, double b, double c, double d, double e)//x^5+ax^4+bx^3+cx^2+dx+e=0根的上界
         {
-            double[] list = { a, b, c, d, e };
-            Array.Sort(list);
-            double q = list[4], y = 0;
-            if (list[0] < 0)
-            {
-                if (a < 0)
-                {
-                    y = q;
-                }
-                else if (b < 0)
-                {
-                    y = Math.Sqrt(q);
-                }
-                else if (c < 0)
-                {
-                    y = Cbrt(q);
-                }
-                else if (d < 0)
-                {
-                    y = Math.Pow(q, 0.25);
-                }
-                else if (e < 0)
-                {
-                    y = Math.Pow(q, 0.2);
-                }
-            }
-            return y;
+            root.Sort();
+            return Fun5_calc(a, b, c, d, e, root[0]) > 0 ? root[0] - 0.5
+                : Fun5_calc(a, b, c, d, e, root[root.Count - 1]) < 0 ? root[0] + 0.5
+                    : (root[1] + root[2]) / 2;
         }
 
         public double Fun5_calc(double a, double b, double c, double d, double e, double x) => x * (x * (x * (x * (x + a) + b) + c) + d) + e;//计算函数值x^5+ax^4+bx^3+cx^2+dx+e
@@ -227,38 +215,33 @@ namespace Solver
             }
             else
             {
-                var f = true;
+                bool f = true;
                 Fun4_realroot(5, 4 * a, 3 * b, 2 * c, d);
-                int i = 0;
-                double x = 0;
-                while (i < root.Length)
+                double t, x = 0;
+                root.ForEach(delegate (double p)
                 {
-                    if (Equal(Fun5_calc(a, b, c, d, e, root[i]), 0))
+                    if (Equal(Fun5_calc(a, b, c, d, e, p), 0))
                     {
                         f = false;
-                        x = root[i];
-                        break;
+                        x = p;
                     }
-                    i++;
-                }
+                });
                 if (f)
                 {
-                    double t = Start(a, b, c, d, e);
-                    x = -Start(-a, b, -c, d, -e);
-                    if (t != 0) x = Equal(x, 0) ? t : (t + x) / 2;
-                    while (Equal(Fun5_derivative(a, b, c, d, x), 0)) x += 0.125;
-                    i = 0;
+                    x = root.Count == 0 ? 0 : Start(a, b, c, d, e);
+                    int i = 0;
                     do
                     {
                         t = x;
                         x -= Fun5_calc(a, b, c, d, e, x) / Fun5_derivative(a, b, c, d, x);
                         i++;
-                    } while (i < 60000000 && Math.Abs(x - t) > 1e-15);
+                    } while (i < 6000 && Math.Abs(x - t) > 1e-15);
                     Show("迭代次数:" + i);
                     t = Fun5_calc(a, b, c, d, e, x);
                     if (Math.Abs(t) > 1) Show("误差较大");
                     Show("L-R=" + t);
                 }
+                root.Clear();
                 Show(x);
                 Fun4(1, x + a, x * (x + a) + b, x * (x * (x + a) + b) + c, x * (x * (x * (x + a) + b) + c) + d);
             }
@@ -305,7 +288,7 @@ namespace Solver
         private void Button1_Click(object sender, RoutedEventArgs e)//求解
         {
             textBox7.Text = "";
-            Array.Clear(root, 0, 4);
+            root.Clear();
             if (Isdouble(textBox1.Text) && Isdouble(textBox2.Text) && Isdouble(textBox3.Text) && Isdouble(textBox4.Text) && Isdouble(textBox5.Text) && Isdouble(textBox6.Text))
             {
                 if (comboBoxItem1.IsSelected)
@@ -362,7 +345,7 @@ namespace Solver
 
         private void Button2_Click(object sender, RoutedEventArgs e)//重置
         {
-            Array.Clear(root, 0, 4);
+            root.Clear();
             textBox1.Text = "0";
             textBox2.Text = "0";
             textBox3.Text = "0";
