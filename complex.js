@@ -1,4 +1,4 @@
-/*complex.js|CappuccinoZ.github.io|2021-5-2*/
+/*complex.js|CappuccinoZ.github.io|2021-6-10*/
 class Complex {
     constructor(real, imag) {
         if (isNaN(real) || isNaN(imag)) throw new TypeError();
@@ -99,29 +99,13 @@ function solve() {
         d = calc("num2"),
         e = calc("num1"),
         f = calc("num0");
-    switch (true) {
-        case a != 0:
-            fun5(b / a, c / a, d / a, e / a, f / a);
-            break;
-        case b != 0:
-            fun4(b, c, d, e, f);
-            break;
-        case c != 0:
-            fun3(c, d, e, f);
-            break;
-        case d != 0:
-            fun2(d, e, f);
-            break;
-        case e != 0:
-            show(-f / e);
-            break;
-        case f != 0:
-            show("无解");
-            break;
-        default:
-            show("任意复数");
-            break
-    }
+    a != 0 ? fun5(b / a, c / a, d / a, e / a, f / a)
+        : b != 0 ? fun4(b, c, d, e, f)
+            : c != 0 ? fun3(c, d, e, f)
+                : d != 0 ? fun2(d, e, f)
+                    : e != 0 ? show(-f / e)
+                        : f != 0 ? show("无解")
+                            : show("任意复数");
     box.innerHTML = '$$\\begin{array}{c}' + box.innerHTML + '\\end{array}$$';
     MathJax.typeset()
 }
@@ -232,8 +216,16 @@ function fun4_realroot(a, b, c, d, e) {
 }
 
 function start(a, b, c, d, e) {
-    y = Math.max(Math.abs(a), Math.abs(b), Math.abs(c), Math.abs(d), Math.abs(e));
-    return (e < 0 ? y : -y)
+    for (let i = 0; i < root.length - 1; i++)
+        for (let j = 0; j < root.length - i - 1; j++)
+            if (root[j] > root[j + 1]) {
+                let t = root[j];
+                root[j] = root[j + 1];
+                root[j + 1] = t;
+            }
+    return fun5_calc(a, b, c, d, e, root[0]) > 0 ? root[0] - 0.5
+        : fun5_calc(a, b, c, d, e, root[root.length - 1]) < 0 ? root[0] + 0.5
+            : (root[1] + root[2]) / 2;
 }
 const fun5_calc = (a, b, c, d, e, x) => x * (x * (x * (x * (x + a) + b) + c) + d) + e;
 const fun5_derivative = (a, b, c, d, x) => x * (x * (x * (5 * x + 4 * a) + 3 * b) + 2 * c) + d;
@@ -252,10 +244,8 @@ function fun5(a, b, c, d, e) {
                 x = root[i];
                 break
             }
-        root.length = 0;
         if (f) {
-            x = start(a, b, c, d, e);
-            while (equal(fun5_derivative(a, b, c, d, x), 0)) x += 0.125;
+            x = root.length == 0 ? 0 : start(a, b, c, d, e);
             i = 0;
             do {
                 t = x;
@@ -267,6 +257,7 @@ function fun5(a, b, c, d, e) {
             if (Math.abs(t) > 1) show("误差较大");
             show("L-R=" + t)
         }
+        root.length = 0;
         show(x);
         fun4(1, x + a, x * (x + a) + b, x * (x * (x + a) + b) + c, x * (x * (x * (x + a) + b) + c) + d)
     }
