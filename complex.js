@@ -188,4 +188,4 @@ function solve() {
                             : show("任意复数");
     box.innerHTML = '$$\\begin{array}{c}' + box.innerHTML + '\\end{array}$$';
     MathJax.typeset();
-}//1 2 3 
+}
