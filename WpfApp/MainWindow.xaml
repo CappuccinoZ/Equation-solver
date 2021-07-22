@@ -19,14 +19,8 @@
         <Label x:Name="label4" Content="dx^2" HorizontalAlignment="Left" Height="28"  Margin="8,137,0,0" VerticalAlignment="Top" Width="45" FontFamily="Consolas" FontSize="16"/>
         <Label x:Name="label5" Content="ex" HorizontalAlignment="Left" Height="28" Margin="8,170,0,0" VerticalAlignment="Top" Width="45" FontFamily="Consolas" FontSize="16"/>
         <Label x:Name="label6" Content="f" HorizontalAlignment="Left" Height="28" Margin="8,203,0,0" VerticalAlignment="Top" Width="45" FontFamily="Consolas" FontSize="16"/>
-        <Label x:Name="label7" Content="ax^5+bx^4+cx^3+dx^2+ex+f=0"  HorizontalAlignment="Left" Height="28" Margin="58,5,0,0" VerticalAlignment="Top" Width="275" FontFamily="Consolas" FontSize="16" HorizontalContentAlignment="Center"/>
+        <Label x:Name="label7" Content="ax^5+bx^4+cx^3+dx^2+ex+f=0"  HorizontalAlignment="Left" Height="28" Margin="58,5,0,0" VerticalAlignment="Top" Width="275" FontFamily="Consolas" FontSize="16" HorizontalContentAlignment="Left"/>
         <Button x:Name="button1" Content="Solve" HorizontalAlignment="Left" Height="24" Margin="8,264,0,0" VerticalAlignment="Top" Width="45" Click="Button1_Click" FontSize="14" FontFamily="Consolas" TabIndex="7"/>
         <Button x:Name="button2" Content="Reset" HorizontalAlignment="Left" Height="24" Margin="8,325,0,0" VerticalAlignment="Top" Width="45" Click="Button2_Click" FontSize="14" FontFamily="Consolas" TabIndex="8"/>
-        <ComboBox x:Name="comboBox1" HorizontalAlignment="Left" Height="24" Margin="8,9,0,0" VerticalAlignment="Top" Width="45" TabIndex="10">
-            <ComboBoxItem x:Name="comboBoxItem1" Content="5" Selected="ComboBoxItem1_Selected" IsSelected="True"/>
-            <ComboBoxItem x:Name="comboBoxItem2" Content="4" Selected="ComboBoxItem2_Selected"/>
-            <ComboBoxItem x:Name="comboBoxItem3" Content="3" Selected="ComboBoxItem3_Selected"/>
-            <ComboBoxItem x:Name="comboBoxItem4" Content="2" Selected="ComboBoxItem4_Selected"/>
-        </ComboBox>
     </Grid>
 </Window>

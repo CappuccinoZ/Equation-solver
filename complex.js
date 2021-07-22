@@ -141,7 +141,7 @@ function fun5(a, b, c, d, e, f) {
     var list = fun4_roots(5, 4 * a, 3 * b, 2 * c, d);
     var roots = [];
     for (let j = 0; j < list.length; j++)
-        if (equal(list[j].i, 0))
+        if (Math.abs(list[j].i, 0) < 1E-8)
             roots.push(list[j].r);
     var t, x = 0;
     var i = 0;
@@ -159,7 +159,7 @@ function fun5(a, b, c, d, e, f) {
                 t = x;
                 x -= fun5_calc(a, b, c, d, e, x) / fun5_derivative(a, b, c, d, x);
                 i++;
-            } while (i < 6000 && Math.abs(x - t) > 1e-15);
+            } while (i < 6000 && Math.abs(x - t) > 1E-15);
         show("迭代次数:" + i);
     }
     show(x);
