@@ -70,35 +70,32 @@ namespace Solver
             Show((t - b) / (2 * a));
         }
 
-        public double Fun3_root(double a, double b, double c, double d)//返回ax^3+bx^2+cx+d=0的一个实数根
+        public double Fun3_root(double v, double a, double b, double c)//vx^3+ax^2+bx+c=0
         {
-            double k = 1 / a;
-            a = b * k;
-            b = c * k;
-            c = d * k;
+            a /= v;
+            b /= v;
+            c /= v;
             double p = b - a * a / 3, q = (2 * a * a - 9 * b) * a / 27 + c;
             Complex t = Sqrt(q * q / 4 + p * p * p / 27);
             return (Cbrt(t - q / 2) + Cbrt(-t - q / 2)).r - a / 3;
         }
 
-        public void Fun3(double a, double b, double c, double d)//ax^3+bx^2+cx+d=0
+        public void Fun3(double v, double a, double b, double c)//vx^3+ax^2+bx+c=0
         {
-            double k = 1 / a;
-            a = b * k;
-            b = c * k;
-            c = d * k;
+            a /= v;
+            b /= v;
+            c /= v;
             double x = Fun3_root(1, a, b, c);
             Show(Math.Round(x, 12));
             Fun2(1, x + a, x * (x + a) + b);
         }
 
-        public List<Complex> Fun4_roots(double a, double b, double c, double d, double e)//四次方程实根数量
+        public List<Complex> Fun4_roots(double v, double a, double b, double c, double d)//vx^4+ax^3+bx^2+cx+d=0
         {
-            double k = 1 / a;
-            a = b * k;
-            b = c * k;
-            c = d * k;
-            d = e * k;
+            a /= v;
+            b /= v;
+            c /= v;
+            d /= v;
             double p, q, r;
             p = b - 3 * a * a / 8;
             q = a * (a * a - 4 * b) / 8 + c;
@@ -135,33 +132,33 @@ namespace Solver
                 Show(z);
         }
 
-        public double Start(double a, double b, double c, double d, double e, List<double> roots)//x^5+ax^4+bx^3+cx^2+dx+e=0根的上界
+        public double Start(double a, double b, double c, double d, double e, List<double> roots)//迭代初始值
         {
             roots.Sort();
             return Fun5_calc(a, b, c, d, e, roots[0]) > 0 ? roots[0] - 0.5
-                : Fun5_calc(a, b, c, d, e, roots[roots.Count - 1]) < 0 ? roots[0] + 0.5
+                : Fun5_calc(a, b, c, d, e, roots[roots.Count - 1]) < 0 ? roots[roots.Count - 1] + 0.5
                     : (roots[1] + roots[2]) / 2;
         }
 
-        public double Fun5_calc(double a, double b, double c, double d, double e, double x) => x * (x * (x * (x * (x + a) + b) + c) + d) + e;//计算函数值x^5+ax^4+bx^3+cx^2+dx+e
+        public double Fun5_calc(double a, double b, double c, double d, double e, double x) => x * (x * (x * (x * (x + a) + b) + c) + d) + e;//计算x^5+ax^4+bx^3+cx^2+dx+e
 
-        public double Fun5_derivative(double a, double b, double c, double d, double x) => x * (x * (x * (5 * x + 4 * a) + 3 * b) + 2 * c) + d;//计算导数5x^4+4ax^3+3bx^2+2cx+d
+        public double DFun5(double a, double b, double c, double d, double x) => x * (x * (x * (5 * x + 4 * a) + 3 * b) + 2 * c) + d;//计算5x^4+4ax^3+3bx^2+2cx+d
 
         public void Fun5(double a, double b, double c, double d, double e)//x^5+ax^4+bx^3+cx^2+dx+e=0
         {
             List<Complex> list = Fun4_roots(5, 4 * a, 3 * b, 2 * c, d);
-            List<double> stations = new List<double>();
+            List<double> roots = new List<double>();
             foreach (var z in list)
                 if (Math.Abs(z.i) < 1E-8)
-                    stations.Add(z.r);
+                    roots.Add(z.r);
             double t, x = 0;
             int i = 0;
 
-            foreach (var station in stations)
+            foreach (var root in roots)
             {
-                if (Equal(Fun5_calc(a, b, c, d, e, station), 0))
+                if (Equal(Fun5_calc(a, b, c, d, e, root), 0))
                 {
-                    x = station;
+                    x = root;
                     i = -1;
                     break;
                 }
@@ -169,17 +166,21 @@ namespace Solver
 
             if (i == 0)//牛顿迭代法
             {
-                if (stations.Count > 0)
-                    x = Start(a, b, c, d, e, stations);
+                if (roots.Count > 0)
+                    x = Start(a, b, c, d, e, roots);
                 if (!Equal(Fun5_calc(a, b, c, d, e, x), 0))
                     do
                     {
                         t = x;
-                        x -= Fun5_calc(a, b, c, d, e, x) / Fun5_derivative(a, b, c, d, x);
+                        x -= Fun5_calc(a, b, c, d, e, x) / DFun5(a, b, c, d, x);
                         i++;
                     } while (i < 6000 && Math.Abs(x - t) > 1E-15);
                 Show("迭代次数：" + i);
             }
+
+            t = Math.Round(x, 5);
+            if (Equal(Fun5_calc(a, b, c, d, e, t), 0))
+                x = t;
 
             Show(Math.Round(x, 12));
             Fun4(1, x + a, x * (x + a) + b, x * (x * (x + a) + b) + c, x * (x * (x * (x + a) + b) + c) + d);

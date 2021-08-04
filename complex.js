@@ -1,4 +1,4 @@
-/*complex.js|CappuccinoZ.github.io|2021-7-22*/
+/*complex.js|CappuccinoZ.github.io|2021-8-4*/
 class Complex {
     constructor(real, imag) {
         if (isNaN(real) || isNaN(imag)) throw new TypeError();
@@ -43,6 +43,7 @@ class Complex {
     }
 }
 
+//相等
 function equal(a, b) {
     if (typeof a == "number") a = new Complex(a, 0);
     if (typeof b == "number") b = new Complex(b, 0);
@@ -50,6 +51,7 @@ function equal(a, b) {
     return Math.abs(t.r) < 1E-12 && Math.abs(t.i) < 1E-12;
 }
 
+//开方
 function sqrt(z) {
     if (typeof z == "number") z = new Complex(z, 0);
     return new Complex(Math.cos(z.arg() / 2), Math.sin(z.arg() / 2)).mul(Math.sqrt(z.abs()));
@@ -60,6 +62,7 @@ function cbrt(z) {
     return new Complex(Math.cos(t), Math.sin(t)).mul(Math.pow(z.abs(), 1.0 / 3));
 }
 
+//二次方程
 function fun2(a, b, c) {
     if (typeof a == "number") a = new Complex(a, 0);
     if (typeof b == "number") b = new Complex(b, 0);
@@ -69,31 +72,30 @@ function fun2(a, b, c) {
     show(b.neg().sub(t).div(a.mul(2)));
 }
 
-function fun3_root(a, b, c, d) {
-    var k = 1 / a;
-    a = b * k;
-    b = c * k;
-    c = d * k;
+//三次方程
+function fun3_root(v, a, b, c) {
+    a /= v;
+    b /= v;
+    c /= v;
     var p = b - a * a / 3, q = (2 * a * a - 9 * b) * a / 27 + c;
     var t = sqrt(q * q / 4 + p * p * p / 27);
     return cbrt(t.sub(q / 2)).r + cbrt(t.neg().sub(q / 2)).r - a / 3;
 }
-function fun3(a, b, c, d) {
-    var k = 1 / a;
-    a = b * k;
-    b = c * k;
-    c = d * k;
+function fun3(v, a, b, c) {
+    a /= v;
+    b /= v;
+    c /= v;
     var x = fun3_root(1, a, b, c);
     show(x);
     fun2(1, x + a, x * (x + a) + b);
 }
 
-function fun4_roots(a, b, c, d, e) {
-    var k = 1 / a;
-    a = b * k;
-    b = c * k;
-    c = d * k;
-    d = e * k;
+//四次方程
+function fun4_roots(v, a, b, c, d) {
+    a /= v;
+    b /= v;
+    c /= v;
+    d /= v;
     var p, q, r, u, v1, v2, t;
     p = b - 3 * a * a / 8;
     q = a * (a * a - 4 * b) / 8 + c;
@@ -123,21 +125,23 @@ function fun4(a, b, c, d, e) {
         show(roots[i]);
 }
 
+//五次方程
 function start(a, b, c, d, e, roots) {
-    roots.sort();
+    roots.sort(function (left, right) {
+        return left - right;
+    });
     return fun5_calc(a, b, c, d, e, roots[0]) > 0 ? roots[0] - 0.5
-        : fun5_calc(a, b, c, d, e, roots[roots.length - 1]) < 0 ? roots[0] + 0.5
+        : fun5_calc(a, b, c, d, e, roots[roots.length - 1]) < 0 ? roots[roots.length - 1] + 0.5
             : (roots[1] + roots[2]) / 2;
 }
 const fun5_calc = (a, b, c, d, e, x) => x * (x * (x * (x * (x + a) + b) + c) + d) + e;
-const fun5_derivative = (a, b, c, d, x) => x * (x * (x * (5 * x + 4 * a) + 3 * b) + 2 * c) + d;
-function fun5(a, b, c, d, e, f) {
-    var k = 1 / a;
-    a = b * k;
-    b = c * k;
-    c = d * k;
-    d = e * k;
-    e = f * k;
+const dfun5 = (a, b, c, d, x) => x * (x * (x * (5 * x + 4 * a) + 3 * b) + 2 * c) + d;
+function fun5(v, a, b, c, d, e) {
+    a /= v;
+    b /= v;
+    c /= v;
+    d /= v;
+    e /= v;
     var list = fun4_roots(5, 4 * a, 3 * b, 2 * c, d);
     var roots = [];
     for (let j = 0; j < list.length; j++)
@@ -157,15 +161,19 @@ function fun5(a, b, c, d, e, f) {
         if (!equal(fun5_calc(a, b, c, d, e, x), 0))
             do {
                 t = x;
-                x -= fun5_calc(a, b, c, d, e, x) / fun5_derivative(a, b, c, d, x);
+                x -= fun5_calc(a, b, c, d, e, x) / dfun5(a, b, c, d, x);
                 i++;
             } while (i < 6000 && Math.abs(x - t) > 1E-15);
         show("迭代次数:" + i);
     }
+    t = Number(x.toFixed(5));
+    if (equal(fun5_calc(a, b, c, d, e, t), 0))
+        x = t;
     show(x);
     fun4(1, x + a, x * (x + a) + b, x * (x * (x + a) + b) + c, x * (x * (x * (x + a) + b) + c) + d);
 }
 
+//运行
 function show(text) {
     var str = (typeof text == "number") ? Number(text.toFixed(12)) : text.toString();
     document.getElementById("box").innerHTML += (str + "\\\\");
@@ -174,7 +182,6 @@ function calc(a) {
     if (document.getElementById(a).value == "") document.getElementById(a).value = "0";
     return Number(eval(document.getElementById(a).value));
 }
-
 function solve() {
     document.getElementById("box").innerHTML = "";
     var a = calc("num5"), b = calc("num4"), c = calc("num3"),
