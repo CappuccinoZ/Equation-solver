@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>一元四次方程计算器</title>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+  <header class="mx-8 mt-4">
+    <h1 class="text-2xl text-center font-semibold">一元四次方程计算器</h1>
+  </header>
+
+  <main class="mx-8 mt-4 flex flex-col items-center">
+    <fieldset class="fieldset w-xs p-4 bg-base-200 border-base-300 rounded-box border">
+      <legend class="fieldset-legend">输入方程</legend>
+
+      <label class="label">四次项系数</label>
+      <input type="number" class="input" id="num4" />
+
+      <label class="label">三次项系数</label>
+      <input type="number" class="input" id="num3" />
+
+      <label class="label">二次项系数</label>
+      <input type="number" class="input" id="num2" />
+
+      <label class="label">一次项系数</label>
+      <input type="number" class="input" id="num1" />
+
+      <label class="label">常数项</label>
+      <input type="number" class="input" id="num0" />
+
+      <button class="btn btn-neutral mt-4">开始计算</button>
+    </fieldset>
+
+    <textarea class="textarea h-24 mt-2" placeholder="方程的解" id="result"></textarea>    
+  </main>
+  
+  <script type="module" src="./scripts/main.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</body>
+
+</html>
