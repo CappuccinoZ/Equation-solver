@@ -103,14 +103,14 @@ export function solve(...nums) {
   const n = nums.length - 1
   let root
   switch (n) {
-    case 2:
-      root = quadraticRoot(...nums)
+    case 4:
+      root = quarticRoot(...nums)
       break
     case 3:
       root = cubicRoot(...nums)
       break
-    case 4:
-      root = quarticRoot(...nums)
+    case 2:
+      root = quadraticRoot(...nums)
       break
     default:
       throw new Error('不支持的参数长度')

@@ -6,38 +6,97 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>一元四次方程计算器</title>
   <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="./styles/style.css">
 </head>
 
 <body>
-  <header class="mx-8 mt-4">
-    <h1 class="text-2xl text-center font-semibold">一元四次方程计算器</h1>
-  </header>
+  <div id="app-container" class="w-full max-w-4xl mx-auto p-4">
+    <div class="w-full p-8 md:p-12 rounded-3xl glass">
+      <!-- 卡片标题 -->
+      <header class="mb-10 text-center">
+        <h1 class="mb-2 text-4xl md:text-5xl font-semibold text-orange-500">Equation Solver</h1>
+        <p class="text-gray-500/80 text-sm md:text-base">
+          一元多项式方程计算工具
+        </p>
+      </header>
 
-  <main class="mx-8 mt-4 flex flex-col items-center">
-    <fieldset class="fieldset w-xs p-4 bg-base-200 border-base-300 rounded-box border">
-      <legend class="fieldset-legend">输入方程</legend>
+      <!-- 卡片主体 -->
+      <div class="flex flex-col gap-8">
+        <!-- 输入区 -->
+        <div class="p-6 bg-base-100/80 rounded-2xl border-base-300 border">
+          <div class="mb-8 flex justify-center items-center">
+            <!-- 切换方程次数 -->
+            <div role="tablist" class="tabs tabs-box">
+              <a role="tab" class="tab px-6" data-degree="2">二次</a>
+              <a role="tab" class="tab px-6" data-degree="3">三次</a>
+              <a role="tab" class="tab tab-active px-6" data-degree="4">四次</a>
+            </div>
 
-      <label class="label">四次项系数</label>
-      <input type="number" class="input" id="num4" />
+            <button id="clearBtn" class="btn btn-sm ml-8 px-4 py-2 rounded-full text-red-500 bg-white">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round"
+                  d="M12 9.75 14.25 12m0 0 2.25 2.25M14.25 12l2.25-2.25M14.25 12 12 14.25m-2.58 4.92-6.374-6.375a1.125 1.125 0 0 1 0-1.59L9.42 4.83c.21-.211.497-.33.795-.33H19.5a2.25 2.25 0 0 1 2.25 2.25v10.5a2.25 2.25 0 0 1-2.25 2.25h-9.284c-.298 0-.585-.119-.795-.33Z" />
+              </svg>            
+              清空
+            </button>
+          </div>
 
-      <label class="label">三次项系数</label>
-      <input type="number" class="input" id="num3" />
+          <!-- 输入系数 -->
+          <div class="flex flex-wrap items-center justify-center gap-3 text-lg md:text-xl text-gray-700">
+            <div id="term-4" class="flex items-center gap-1 ">
+              <input id="num4" type="number" placeholder="a" class="input input-lg w-16 md:w-20 text-center"
+                value="1" />
+              <label for="num4" class="font-semibold">x<sup>4</sup></label>
+              <span class="text-gray-400 mx-1">+</span>
+            </div>
 
-      <label class="label">二次项系数</label>
-      <input type="number" class="input" id="num2" />
+            <div id="term-3" class="flex items-center gap-1">
+              <input id="num3" type="number" placeholder="b" class="input input-lg w-16 md:w-20 text-center"
+                value="0" />
+              <label for="num3" class="font-semibold">x<sup>3</sup></label>
+              <span class="text-gray-400 mx-1">+</span>
+            </div>
 
-      <label class="label">一次项系数</label>
-      <input type="number" class="input" id="num1" />
+            <div id="term-2" class="flex items-center gap-1">
+              <input id="num2" type="number" placeholder="c" class="input input-lg w-16 md:w-20 text-center"
+                value="0" />
+              <label for="num2" class="font-semibold">x<sup>2</sup></label>
+              <span class="text-gray-400 mx-1">+</span>
+            </div>
 
-      <label class="label">常数项</label>
-      <input type="number" class="input" id="num0" />
+            <div id="term-1" class="flex items-center gap-1">
+              <input id="num1" type="number" placeholder="d" class="input input-lg w-16 md:w-20 text-center"
+                value="0" />
+              <label for="num1" class="font-semibold">x</label>
+              <span class="text-gray-400 mx-1">+</span>
+            </div>
 
-      <button class="btn btn-neutral mt-4">开始计算</button>
-    </fieldset>
+            <div id="term-0" class="flex items-center gap-1">
+              <input id="num0" type="number" placeholder="e" class="input input-lg w-16 md:w-20 text-center"
+                value="0" />
+              <span class="ml-2 text-gray-600 font-semibold"> = 0</span>
+            </div>
+          </div>
 
-    <textarea class="textarea h-24 mt-2" placeholder="方程的解" id="result"></textarea>    
-  </main>
-  
+          <!-- 计算按钮 -->
+          <div class="mt-8 flex justify-center">
+            <button class="btn btn-lg px-8 py-3 rounded-full text-white bg-orange-500" id="solve-btn">开始计算</button>
+          </div>
+        </div>
+
+        <!-- 结果区 -->
+        <div id="output-section" class="flex flex-col p-6 bg-base-100/80 rounded-2xl border-base-300 border hidden">
+          <h3 class="text-lg font-semibold text-gray-800 mb-4">结果：</h3>
+
+          <div id="result-container" class="space-y-3 flex-grow">
+            <!-- 这里显示结果 -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script type="module" src="./scripts/main.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </body>
