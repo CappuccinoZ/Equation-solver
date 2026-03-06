@@ -21,25 +21,25 @@ let currentDegree = 4
 // 清除系数
 function clearNums(degree) {
   if (degree === 4) {
-    input4.value = 1
-    input3.value = 0
-    input2.value = 0
-    input1.value = 0
-    input0.value = 0
+    input4.value = '1'
+    input3.value = ''
+    input2.value = ''
+    input1.value = ''
+    input0.value = ''
 
   } else if (degree === 3) {
-    input4.value = 0
-    input3.value = 1
-    input2.value = 0
-    input1.value = 0
-    input0.value = 0
+    input4.value = ''
+    input3.value = '1'
+    input2.value = ''
+    input1.value = ''
+    input0.value = ''
 
   } else if (degree === 2) {
-    input4.value = 0
-    input3.value = 0
-    input2.value = 1
-    input1.value = 0
-    input0.value = 0
+    input4.value = ''
+    input3.value = ''
+    input2.value = '1'
+    input1.value = ''
+    input0.value = ''
   }
 }
 
@@ -111,16 +111,21 @@ function displayResults(roots) {
     const valStr = root.toString()
 
     const div = document.createElement('div')
-    div.className = `p-4 rounded-xl border ${isReal ? 'bg-green-50 border-green-200' : 'bg-purple-50 border-purple-200'} flex justify-between items-center transition-transform hover:scale-[1.02]`
+    div.className = `p-4 rounded-xl border ${isReal ? 'bg-green-50 border-green-200' : 'bg-purple-50 border-purple-200'} transition-transform hover:scale-[1.02]`
 
     div.innerHTML = `
-      <div class="flex items-center gap-3">
+      <div class="flex items-center justify-between gap-3">
         <span class="font-mono text-sm font-bold opacity-50">x<sub>${index + 1}</sub></span>
+        <div class="grow hidden md:block">
+          <span class="font-mono text-lg font-medium text-gray-800">${valStr}</span>
+        </div>        
+        <span class="badge font-bold uppercase tracking-wider ${isReal ? 'bg-green-200 text-green-800' : 'bg-purple-200 text-purple-800'}">
+          ${isReal ? 'Real' : 'Complex'}
+        </span>
+      </div>
+      <div class="grow block md:hidden">
         <span class="font-mono text-lg font-medium text-gray-800">${valStr}</span>
       </div>
-      <span class="badge font-bold uppercase tracking-wider ${isReal ? 'bg-green-200 text-green-800' : 'bg-purple-200 text-purple-800'}">
-        ${isReal ? 'Real' : 'Complex'}
-      </span>
     `
     resultContainer.appendChild(div)
   })
@@ -150,7 +155,6 @@ function solveFn() {
   } catch (err) {
     console.error(err)
     alert("计算出错: " + err.message)
-    outputSection.classList.add('hidden')
     return
   }
 
