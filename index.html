@@ -1,101 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>一元多项式方程计算</title>
-  <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
-  <link rel="stylesheet" href="./styles/style.css">
-</head>
-
-<body>
-  <div class="w-full max-w-4xl mx-auto md:p-4">
-    <div class="glass-card w-full p-6 md:p-12 rounded-3xl">
-      <!-- 卡片标题 -->
-      <header class="mb-10 text-center">
-        <h1 class="mb-2 text-4xl md:text-5xl font-semibold text-orange-500">Equation Solver</h1>
-        <p class="text-gray-500/80 text-sm md:text-base">
-          一元多项式方程计算工具
-        </p>
-      </header>
-
-      <!-- 卡片主体 -->
-      <div class="flex flex-col gap-8">
-        <!-- 输入区 -->
-        <div class="p-6 bg-base-100/80 rounded-2xl border-base-300 border">
-          <div class="mb-8 flex flex-col md:flex-row justify-center items-center gap-4 md:gap-8">
-            <!-- 切换方程次数 -->
-            <div role="tablist" class="tabs tabs-box">
-              <a role="tab" class="tab md:px-6" data-degree="2">二次</a>
-              <a role="tab" class="tab md:px-6" data-degree="3">三次</a>
-              <a role="tab" class="tab tab-active md:px-6" data-degree="4">四次</a>
-            </div>
-
-            <button id="clearBtn" class="btn btn-sm px-4 py-2 rounded-full text-red-500 bg-white">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                stroke="currentColor" class="size-6">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                  d="M12 9.75 14.25 12m0 0 2.25 2.25M14.25 12l2.25-2.25M14.25 12 12 14.25m-2.58 4.92-6.374-6.375a1.125 1.125 0 0 1 0-1.59L9.42 4.83c.21-.211.497-.33.795-.33H19.5a2.25 2.25 0 0 1 2.25 2.25v10.5a2.25 2.25 0 0 1-2.25 2.25h-9.284c-.298 0-.585-.119-.795-.33Z" />
-              </svg>
-              清空
-            </button>
-          </div>
-
-          <!-- 输入系数 -->
-          <div class="flex flex-wrap items-center justify-center gap-3 text-lg md:text-xl text-gray-700">
-            <div id="term-4" class="flex items-center gap-1 ">
-              <input id="num4" type="number" placeholder="a" class="input input-lg w-16 md:w-20 text-center"
-                value="1" />
-              <label for="num4" class="font-semibold">x<sup>4</sup></label>
-              <span class="text-gray-400 mx-1">+</span>
-            </div>
-
-            <div id="term-3" class="flex items-center gap-1">
-              <input id="num3" type="number" placeholder="b" class="input input-lg w-16 md:w-20 text-center" />
-              <label for="num3" class="font-semibold">x<sup>3</sup></label>
-              <span class="text-gray-400 mx-1">+</span>
-            </div>
-
-            <div id="term-2" class="flex items-center gap-1">
-              <input id="num2" type="number" placeholder="c" class="input input-lg w-16 md:w-20 text-center" />
-              <label for="num2" class="font-semibold">x<sup>2</sup></label>
-              <span class="text-gray-400 mx-1">+</span>
-            </div>
-
-            <div id="term-1" class="flex items-center gap-1">
-              <input id="num1" type="number" placeholder="d" class="input input-lg w-16 md:w-20 text-center" />
-              <label for="num1" class="font-semibold mr-2">x</label>
-              <span class="text-gray-400 mx-1">+</span>
-            </div>
-
-            <div id="term-0" class="flex items-center gap-1">
-              <input id="num0" type="number" placeholder="e" class="input input-lg w-16 md:w-20 text-center" />
-              <span class="text-gray-400 ml-2">=</span>
-              <span class="font-semibold mx-1">0</span>
-            </div>
-          </div>
-
-          <!-- 计算按钮 -->
-          <div class="mt-8 flex justify-center">
-            <button class="btn btn-lg px-8 py-3 rounded-full text-white bg-orange-500" id="solve-btn">开始计算</button>
-          </div>
-        </div>
-
-        <!-- 结果区 -->
-        <div id="output-section" class="flex flex-col p-6 bg-base-100/80 rounded-2xl border-base-300 border hidden">
-          <h3 class="text-lg font-semibold text-gray-800 mb-4">结果：</h3>
-
-          <div id="result-container" class="space-y-3">
-            <!-- 这里显示结果 -->
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script type="module" src="./scripts/main.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-</body>
-
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/icon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>一元多项式方程计算</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
 </html>
