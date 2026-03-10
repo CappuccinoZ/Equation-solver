@@ -42,7 +42,9 @@ function cubicRealRoot(den, ...nums) {
   const p = b - a * a / 3
   const q = (9 * b - 2 * a * a) * a / 27 - c
   const sqrt = Complex.sqrt(q * q / 4 + p * p * p / 27)
-  const y = Complex.cbrt(new Complex(q / 2).add(sqrt)).real + Complex.cbrt(new Complex(q / 2).sub(sqrt)).real - a / 3
+  const cbrt1 = Complex.cbrt(new Complex(q / 2).add(sqrt))
+  const cbrt2 = Complex.cbrt(new Complex(q / 2).sub(sqrt))
+  const y = cbrt1.add(cbrt2).real - a / 3
 
   return y
 }
@@ -77,15 +79,13 @@ function quarticRoot(den, ...nums) {
       m = (p + sqrt(p^2 - 4r))/2
       l = (p - sqrt(p^2 - 4r))/2
     */
-    k = Complex.Zero;
+    k = Complex.Zero; // 必要的分号
     [m, l] = quadraticRoot(1, -p, r)
-    // m = new Complex(p).add(Complex.sqrt(p * p - 4 * r)).div(2)
-    // l = new Complex(p).sub(Complex.sqrt(p * p - 4 * r)).div(2)
   } else {
     /*
       k^2 满足方程 x^3 + 2px^2 + (p^2 - 4r)x - q^2 = 0
-      m = (u^2 + p + q/u)/2
-      l = (u^2 + p - q/u)/2
+      m = (k^2 + p + q/k)/2
+      l = (k^2 + p - q/k)/2
       不要改加减号顺序
     */
     k = Complex.sqrt(cubicRealRoot(1, 2 * p, p * p - 4 * r, -q * q))
