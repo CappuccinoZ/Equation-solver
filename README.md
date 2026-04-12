@@ -1,6 +1,6 @@
 # Quartic Equation Solver
 
-<p align="center">
+<p>
   <a href="https://kitakita.top/equation-solver/">Demo</a> |
   English |
   <a href="./README_CN.md">中文</a>
