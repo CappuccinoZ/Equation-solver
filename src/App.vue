@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full max-w-4xl mx-auto md:p-4">
+  <div class="w-full max-w-4xl mx-auto p-4 md:p-8">
     <div class="glass-card w-full p-6 md:p-12 rounded-3xl">
       <div class="mb-10 text-center">
         <h1 class="mb-2 text-3xl md:text-4xl font-semibold text-orange-500">一元四次方程计算器</h1>
