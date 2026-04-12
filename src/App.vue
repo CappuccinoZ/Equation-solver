@@ -38,7 +38,7 @@
             </button>
           </div>
 
-          <div class="flex flex-wrap items-center justify-center gap-3 text-lg md:text-xl text-gray-700">
+          <div class="flex flex-wrap items-center justify-center gap-1 text-lg md:text-xl text-gray-700">
             <div v-show="currentDegree === 4" class="flex items-center gap-1">
               <input v-model="coefficients.num4" type="number" :placeholder="placeholders.num4"
                 class="input input-lg w-16 md:w-20 text-center" />
