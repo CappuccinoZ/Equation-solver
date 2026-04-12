@@ -1,6 +1,6 @@
 # 一元四次方程计算器
 
-<p align="center">
+<p>
   <a href="https://kitakita.top/equation-solver/">Demo</a> |
   <a href="./README.md">English</a> |
   中文
